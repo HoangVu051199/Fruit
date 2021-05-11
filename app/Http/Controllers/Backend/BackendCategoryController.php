@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BackendCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
+
 
 class BackendCategoryController extends Controller
 {
+
     public function index()
     {
         $category = Category::orderBy('id', 'asc')->get();
@@ -29,7 +32,7 @@ class BackendCategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'status'=> $request->status
+            'status' => $request->status
         ]);
 
         return redirect()->route('category.index')->with('Success', 'Thêm thành công');
@@ -51,7 +54,7 @@ class BackendCategoryController extends Controller
         $category->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
-            'status'=> $request->status
+            'status' => $request->status
         ]);
 
         return redirect()->route('category.index')->with('Success', 'Sửa thành công');
