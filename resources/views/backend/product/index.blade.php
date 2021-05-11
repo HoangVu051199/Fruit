@@ -30,6 +30,7 @@
                                         <th scope="col">Loại danh mục</th>
                                         <th scope="col">Giá</th>
                                         <th scope="col">Đơn vị tính</th>
+                                        <th scope="col">Nổi bật</th>
                                         <th scope="col">Trạng thái</th>
                                         <th scope="col">Thao tác</th>
                                     </tr>
@@ -58,6 +59,15 @@
                                                 @else
                                                     {!! NULL !!}
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <span class="label gradient-1 btn-rounded">
+                                                    @if($item->hot == 0)
+                                                        Ẩn
+                                                    @else
+                                                        Hiển thị
+                                                    @endif
+                                                </span>
                                             </td>
                                             <td>
                                                 <span class="label gradient-1 btn-rounded">

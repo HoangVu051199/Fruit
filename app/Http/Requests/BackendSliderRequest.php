@@ -26,6 +26,7 @@ class BackendSliderRequest extends FormRequest
         return [
             'image'    => 'required',
             'position' => 'required',
+            'status' => 'required',
         ];
     }
 
@@ -33,7 +34,8 @@ class BackendSliderRequest extends FormRequest
     {
         return [
             'image.required' => 'Dữ liệu không được để trống',
-            'position'       => 'Dữ liệu không được để trống',
+            'position.required' => 'Dữ liệu không được để trống',
+            'status.required' => 'Dữ liệu không được để trống',
         ];
     }
 }

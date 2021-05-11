@@ -25,6 +25,7 @@ class CreateProductTable extends Migration
             $table->integer('price');
             $table->string('origin');
             $table->text('description');
+            $table->tinyInteger('hot');
             $table->tinyInteger('status');
             $table->timestamps();
         });

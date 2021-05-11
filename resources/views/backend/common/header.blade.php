@@ -3,7 +3,7 @@
     <div class="brand-logo">
         <a href="{{ URL::to('/admin') }}">
             <b class="logo-abbr"><img src="backend/images/logo.png" alt=""> </b>
-            <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+            <span class="logo-compact"><img src="backend/images/logo-compact.png" alt=""></span>
             <span class="brand-title">
 {{--               <img src="backend/images/logo-text.png" alt="">--}}
                 {{ Auth::user()->name }}

@@ -53,7 +53,7 @@
                                             <select class="form-control" id="val-skill" name="status" aria-required="true" aria-describedby="val-skill-error">
                                                 <option value="">__Chọn trạng thái__</option>
                                                 <option value="0">Ẩn</option>
-                                                <option value="1">Hiện</option>
+                                                <option value="1">Hiển thị</option>
                                             </select>
                                             <div id="val-skill-error" class="invalid-feedback animated fadeInDown" style="display: block;">
                                                 @if($errors->first('status'))

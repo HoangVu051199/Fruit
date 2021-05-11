@@ -69,7 +69,7 @@
 <!-- Datamap -->
 <script src="backend/plugins/d3v3/index.js"></script>
 <script src="backend/plugins/topojson/topojson.min.js"></script>
-<script src="backend/plugins/datamaps/datamaps.world.min.js"></script>
+{{--<script src="backend/plugins/datamaps/datamaps.world.min.js"></script>--}}
 <!-- Morrisjs -->
 <script src="backend/plugins/raphael/raphael.min.js"></script>
 <script src="backend/plugins/morris/morris.min.js"></script>
@@ -79,6 +79,6 @@
 <!-- ChartistJS -->
 <script src="backend/plugins/chartist/js/chartist.min.js"></script>
 <script src="backend/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
-<script src="backend/js/dashboard/dashboard-1.js"></script>
+{{--<script src="backend/js/dashboard/dashboard-1.js"></script>--}}
 </body>
 </html>

@@ -50,6 +50,7 @@ class BackendProductController extends Controller
             'price' => $request->price,
             'origin' => $request->origin,
             'description' => $request->description,
+            'hot' => $request->hot,
             'status' => $request->status,
         ]);
 
@@ -89,6 +90,7 @@ class BackendProductController extends Controller
             'price' => $request->price,
             'origin' => $request->origin,
             'description' => $request->description,
+            'hot' => $request->hot,
             'status' => $request->status,
         ]);
 

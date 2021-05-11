@@ -1,7 +1,7 @@
 @extends('layouts.app_backend')
 @section('title', 'Danh mục')
 @section('content')
-    <div class="row page-titles mx-0">
+    <div class="row page-titles mx-0" xmlns:wire="http://www.w3.org/1999/xhtml">
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
@@ -19,6 +19,9 @@
                                 <span class="mr-1">Danh mục</span>/
                                 <a href="{{ route('category.create') }}" class="btn mb-1 btn-primary">Thêm<span class="btn-icon ml-2"><i class="fa fa-plus"></i></span>
                                 </a>
+                                <div class="col-lg-3 float-right">
+                                    <input type="search" class="form-control rounded" placeholder="Search Category" aria-label="Search Dashboard">
+                                </div>
                             </h4>
                             <div class="table-responsive">
                                 <table class="table header-border table-hover verticle-middle">

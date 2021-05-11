@@ -27,6 +27,7 @@ class CreateOrderTable extends Migration
             $table->string('address');
             $table->longText('note')->nullable();
             $table->tinyInteger('status');
+            $table->float('total');
             $table->timestamps();
         });
     }

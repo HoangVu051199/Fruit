@@ -31,6 +31,7 @@ class BackendProductRequest extends FormRequest
             'price'       => 'required',
             'origin'      => 'required',
             'description' => 'required',
+            'hot'         => 'required',
             'status'      => 'required',
         ];
     }
@@ -46,6 +47,7 @@ class BackendProductRequest extends FormRequest
             'price.required'       => 'Dữ liệu không được để trống',
             'origin.required'      => 'Dữ liệu không được để trống',
             'description.required' => 'Dữ liệu không được để trống',
+            'hot.required'         => 'Dữ liệu không được để trống',
             'status.required'      => 'Dữ liệu không được để trống',
         ];
     }

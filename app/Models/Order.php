@@ -22,5 +22,6 @@ class Order extends Model
         'address',
         'note',
         'status',
+        'total',
     ];
 }

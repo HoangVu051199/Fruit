@@ -121,6 +121,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group row is-invalid">
+                                        <label class="col-lg-4 col-form-label" for="val-skill">Nổi bật <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control" id="val-skill" name="hot" aria-required="true" aria-describedby="val-skill-error">
+                                                <option value="">__Chọn trạng thái__</option>
+                                                <option value="0">Ẩn</option>
+                                                <option value="1">Hiện</option>
+                                            </select>
+                                            <div id="val-skill-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                                @if($errors->first('hot'))
+                                                    <small id="emailHelp" class="form-text text-danger">{{ $errors->first('hot') }}</small>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row is-invalid">
                                         <label class="col-lg-4 col-form-label" for="val-skill">Trạng thái <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">

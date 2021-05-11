@@ -38,7 +38,7 @@
                                             <td>{{ ++$key }}</td>
                                             <td style="text-transform: capitalize">{{ $item->name }}</td>
                                             <td>{{ $item->phone }}</td>
-                                            <td></td>
+                                            <td>{{ $item->total }}</td>
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->note }}</td>
                                             <td>
