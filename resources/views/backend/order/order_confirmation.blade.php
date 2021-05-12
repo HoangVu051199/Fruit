@@ -15,60 +15,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">
-                                <span class="mr-1">Chờ xác nhận</span>
-                            </h4>
-                            <div class="table-responsive">
-                                <table class="table header-border table-hover verticle-middle">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">STT</th>
-                                        <th scope="col">Tên người đặt</th>
-                                        <th scope="col">Số điện thoại</th>
-                                        <th scope="col">Tổng tiền</th>
-                                        <th scope="col">Ngày đặt</th>
-                                        <th scope="col">Ghi chú</th>
-                                        <th scope="col">Trạng thái</th>
-                                        <th scope="col">Thao tác</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($confirmation as $key => $item)
-                                        <tr>
-                                            <td>{{ ++$key }}</td>
-                                            <td style="text-transform: capitalize">{{ $item->name }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                            <td>{{ $item->total }}</td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>{{ $item->note }}</td>
-                                            <td>
-                                            <span class="label gradient-1 btn-rounded">
-                                                @if($item->status == 0)
-                                                    Chờ xác nhận
-                                                @else
-                                                    {{ NULL }}
-                                                @endif
-                                            </span>
-                                            </td>
-{{--                                            <td>--}}
-{{--                                            <span>--}}
-{{--                                                <a href="{{ route('confirmation.edit', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">--}}
-{{--                                                    <i class="fa fa-pencil color-muted m-r-5"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{ route('confirmation.show', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">--}}
-{{--                                                    <i class="fa fa-eye color-danger ml-3"></i>--}}
-{{--                                                </a>--}}
-{{--                                            </span>--}}
-{{--                                            </td>--}}
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            @livewire('search-order-confirmation')
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @livewireScripts
 @endsection

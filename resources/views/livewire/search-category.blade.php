@@ -5,7 +5,7 @@
                     class="fa fa-plus"></i></span>
         </a>
         <div class="col-lg-3 float-right">
-            <input type="search" class="form-control rounded" placeholder="Search Category" wire:model="searchTerm"
+            <input type="search" class="form-control rounded" placeholder="Tìm kiếm theo tên..." wire:model="searchTerm"
                    aria-label="Search Dashboard">
         </div>
     </h4>

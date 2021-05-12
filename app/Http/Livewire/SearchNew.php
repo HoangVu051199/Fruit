@@ -2,26 +2,27 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
+use App\Models\News;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Pagination\Paginator;
 
-class Search extends Component
+class SearchNew extends Component
 {
     use WithPagination;
     public $searchTerm;
-    public $currentPage = 1;
+    public $cunrrentPage = 1;
 
     public function render()
     {
-        $query = '%' . $this->searchTerm . '%';
+        $searchTerm = '%'. $this->searchTerm .'%';
+        $new = News::where('title', 'LIKE', $searchTerm)
+            ->orWhere('content', 'LIKE', $searchTerm)
+            ->orderBy('id', 'ASC')->paginate(1);
 
-        return view('livewire.search', [
-            'category' => Category::where(function ($sub_query) {
-                $sub_query->where('name', 'like', '%' . $this->searchTerm . '%');
-            })->paginate(1)
-        ]);
+        return view('livewire.search-new',[
+            'new' => $new
+            ]);
     }
 
     public function setPage($url)
