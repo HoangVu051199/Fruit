@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -7,7 +6,6 @@ use App\Http\Requests\BackendCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
-
 
 class BackendCategoryController extends Controller
 {
@@ -19,25 +17,29 @@ class BackendCategoryController extends Controller
         return view('backend.category.index', compact('category'));
     }
 
-
     public function create()
     {
         return view('backend.category.create');
     }
 
-
     public function store(BackendCategoryRequest $request)
     {
-
-        Category::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
+        try{
+            Category::create([
+            'name' => $request->name, 
+            'slug' => Str::slug($request->name), 
             'status' => $request->status
         ]);
 
-        return redirect()->route('category.index')->with('Success', 'Thêm thành công');
+        return redirect()
+            ->route('category.index')
+            ->with('message', 'Thêm thành công');
+        }catch(\Exception $exception){
+            return redirect()->back()
+                ->with('error', 'Đã xảy ra lỗi khi lưu dữ liệu');
+        }
+        
     }
-
 
     public function edit($id)
     {
@@ -46,20 +48,20 @@ class BackendCategoryController extends Controller
         return view('backend.category.update', compact('category'));
     }
 
-
     public function update(BackendCategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
 
         $category->update([
-            'name' => $request->name,
+            'name' => $request->name, 
             'slug' => Str::slug($request->name),
-            'status' => $request->status
-        ]);
+             'status' => $request->status
+         ]);
 
-        return redirect()->route('category.index')->with('Success', 'Sửa thành công');
+        return redirect()
+            ->route('category.index')
+            ->with('Success', 'Sửa thành công');
     }
-
 
     public function destroy($id)
     {
@@ -67,6 +69,9 @@ class BackendCategoryController extends Controller
 
         $category->delete();
 
-        return redirect()->back()->with('Success', 'Xoá thành công');
+        return redirect()
+            ->back()
+            ->with('Success', 'Xoá thành công');
     }
 }
+

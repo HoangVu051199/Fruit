@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="backend/plugins/chartist/css/chartist.min.css">
     <link rel="stylesheet" href="backend/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Custom Stylesheet -->
+    <link href="backend/plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link href="backend/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -80,5 +81,9 @@
 <script src="backend/plugins/chartist/js/chartist.min.js"></script>
 <script src="backend/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 {{--<script src="backend/js/dashboard/dashboard-1.js"></script>--}}
+<!-- Toastr -->
+<script src="backend/plugins/toastr/js/toastr.min.js"></script>
+<script src="backend/plugins/toastr/js/toastr.init.js"></script>
+@yield('js')
 </body>
 </html>

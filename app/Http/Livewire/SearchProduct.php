@@ -20,7 +20,7 @@ class SearchProduct extends Component
             ->orWhere('price', 'LIKE', $searchTerm)
             ->orWhere('origin', 'LIKE', $searchTerm)
             ->orWhere('description', 'LIKE', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(1);
+            ->orderBy('id', 'ASC')->paginate(10);
 
         return view('livewire.search-product',[
             'product' => $product

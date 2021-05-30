@@ -19,6 +19,7 @@ class CreateCategoryTable extends Migration
             $table->string('slug');
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

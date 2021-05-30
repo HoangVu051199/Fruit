@@ -20,6 +20,7 @@ class CreateShippingTable extends Migration
             $table->integer('phone');
             $table->string('address');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

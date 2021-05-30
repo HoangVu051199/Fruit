@@ -24,4 +24,10 @@ class Product extends Model
         'hot',
         'status',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
 }

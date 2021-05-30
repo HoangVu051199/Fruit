@@ -6,10 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Shanmuga\LaravelEntrust\Traits\LaravelEntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LaravelEntrustUserTrait;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +23,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'birthday',
+        'avatar',
+        'status',
+        'role_id',
     ];
 
     /**
@@ -40,4 +48,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function userRole()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'role_id', 'user_id');
+    } 
 }

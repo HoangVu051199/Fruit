@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -18,7 +17,6 @@ class BackendNewsController extends Controller
         return view('backend.new.index', compact('new'));
     }
 
-
     public function create()
     {
         $cate_new = Cate_New::all();
@@ -26,28 +24,30 @@ class BackendNewsController extends Controller
         return view('backend.new.create', compact('cate_new'));
     }
 
-
     public function store(BackendNewsRequest $request)
     {
         $img = '';
-        if ($request->has('image')) {
+        if ($request->has('image'))
+        {
             $image = $request->file('image');
-            $img = '/files' . '/uploads' . '/images/' . now()->format('H-i-s-m-s-d-m-Y') . '.' . $request->file('image')->extension();
+            $img = '/files' . '/uploads' . '/images/' . now()->format('H-i-s-m-s-d-m-Y') . '.' . $request->file('image')
+                ->extension();
             $image->move(public_path() . '/files' . '/uploads' . '/images', $img);
         }
 
         News::create([
-            'catenew_id' => $request->catenew_id,
-            'title'      => $request->title,
-            'slug'       => Str::slug($request->title),
-            'image'      => $img,
-            'content'    => $request->contents,
-            'status'     => $request->status,
+            'catenew_id' => $request->catenew_id, 
+            'title' => $request->title, 
+            'slug' => Str::slug($request->title) , 
+            'image' => $img, 
+            'content' => $request->contents, 
+            'status' => $request->status, 
         ]);
 
-        return redirect()->route('new.index')->with('Success', 'Thêm thành công');
+        return redirect()
+            ->route('new.index')
+            ->with('Success', 'Thêm thành công');
     }
-
 
     public function edit($id)
     {
@@ -58,29 +58,31 @@ class BackendNewsController extends Controller
         return view('backend.new.update', compact('new', 'cate_new'));
     }
 
-
     public function update(BackendNewsRequest $request, $id)
     {
         $new = News::findOrFail($id);
 
         $img = '';
-        if ($request->has('image')) {
+        if ($request->has('image'))
+        {
             $image = $request->file('image');
-            $img = '/files' . '/uploads' . '/images/' . now()->format('H-i-s-m-s-m-d-Y') . '.' . $request->file('image')->extension();
+            $img = '/files' . '/uploads' . '/images/' . now()->format('H-i-s-m-s-m-d-Y') . '.' . $request->file('image')
+                ->extension();
             $image->move(public_path() . '/files' . '/uploads' . '/images', $img);
         }
 
         $new->update([
             'catenew_id' => $request->catenew_id,
-            'title'      => $request->title,
-            'image'      => $img,
-            'content'    => $request->contents,
-            'status'     => $request->status,
+            'title' => $request->title,
+            'image' => $img,
+            'content' => $request->contents, 
+            'status' => $request->status, 
         ]);
 
-        return redirect()->route('new.index')->with('Success', 'Sửa thành công');
+        return redirect()
+            ->route('new.index')
+            ->with('Success', 'Sửa thành công');
     }
-
 
     public function destroy($id)
     {
@@ -88,6 +90,9 @@ class BackendNewsController extends Controller
 
         $new->delete();
 
-        return redirect()->route('new.index')->with('Success', 'Xoá thành công');
+        return redirect()
+            ->route('new.index')
+            ->with('Success', 'Xoá thành công');
     }
 }
+

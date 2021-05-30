@@ -16,11 +16,14 @@ class CreateOrderTable extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('shipping_id');
-            $table->foreign('shipping_id')->references('id')->on('shipping');
+            $table->foreign('shipping_id')->references('id')->on('shipping')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('payment');
+            $table->foreign('payment_id')->references('id')->on('payment')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->integer('phone');
@@ -29,6 +32,7 @@ class CreateOrderTable extends Migration
             $table->tinyInteger('status');
             $table->float('total');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

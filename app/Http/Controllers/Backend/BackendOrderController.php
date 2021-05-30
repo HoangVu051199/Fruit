@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -9,31 +8,40 @@ use Illuminate\Http\Request;
 
 class BackendOrderController extends Controller
 {
-    public function orderConfirmation (){
+    public function orderConfirmation()
+    {
 
-        $confirmation = Order::orderBy('id', 'DESC')->where('status', 0)->get();
+        $confirmation = Order::orderBy('id', 'DESC')->where('status', 0)
+            ->get();
 
         return view('backend.order.order_confirmation', compact('confirmation'));
     }
 
-    public function shipping(){
+    public function shipping()
+    {
 
-        $shipping = Order::orderBy('id', 'DESC')->where('status', 1)->get();
+        $shipping = Order::orderBy('id', 'DESC')->where('status', 1)
+            ->get();
 
         return view('backend.order.shipping', compact('shipping'));
     }
 
-    public function orders(){
+    public function orders()
+    {
 
-        $orders = Order::orderBy('id', 'DESC')->where('status', 2)->get();
+        $orders = Order::orderBy('id', 'DESC')->where('status', 2)
+            ->get();
 
         return view('backend.order.order', compact('orders'));
     }
 
-    public function countermand() {
+    public function countermand()
+    {
 
-        $countermand = Order::orderBy('id', 'DESC')->where('status', 3)->get();
+        $countermand = Order::orderBy('id', 'DESC')->where('status', 3)
+            ->get();
 
         return view('backend.order.countermand', compact('countermand'));
     }
 }
+

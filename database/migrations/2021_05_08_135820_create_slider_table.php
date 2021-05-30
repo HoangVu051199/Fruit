@@ -19,6 +19,7 @@ class CreateSliderTable extends Migration
             $table->string('position');
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -15,23 +14,22 @@ class BackendUnitController extends Controller
         return view('backend.unit.index', compact('unit'));
     }
 
-
     public function create()
     {
         return view('backend.unit.create');
     }
 
-
     public function store(BackendUnitRequest $request)
     {
         Unit::create([
-            'name' => $request->name,
-            'description' => $request->description,
+            'name' => $request->name, 
+            'description' => $request->description, 
         ]);
 
-        return redirect()->route('unit.index')->with('Success', 'Thêm thành công');
+        return redirect()
+            ->route('unit.index')
+            ->with('Success', 'Thêm thành công');
     }
-
 
     public function edit($id)
     {
@@ -40,19 +38,19 @@ class BackendUnitController extends Controller
         return view('backend.unit.update', compact('unit'));
     }
 
-
     public function update(BackendUnitRequest $request, $id)
     {
         $unit = Unit::findOrFail($id);
 
         $unit->update([
-            'name' => $request->name,
-            'description' => $request->description,
+            'name' => $request->name, 
+            'description' => $request->description, 
         ]);
 
-        return redirect()->route('unit.index')->with('Success', ' Sửa thành công');
+        return redirect()
+            ->route('unit.index')
+            ->with('Success', ' Sửa thành công');
     }
-
 
     public function destroy($id)
     {
@@ -60,6 +58,9 @@ class BackendUnitController extends Controller
 
         $unit->delete();
 
-        return redirect()->route('unit.index')->with('Success', 'Xoá thành công');
+        return redirect()
+            ->route('unit.index')
+            ->with('Success', 'Xoá thành công');
     }
 }
+

@@ -9,6 +9,16 @@
             </li>
             <li class="mega-menu mega-menu-sm">
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-layers menu-icon"></i><span class="nav-text">Phân Quyền</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('users.list') }}">Quản Lý User</a></li>
+                    <li><a href="{{ route('roles.list') }}">Quản Lý Vai Trò</a></li>
+                    <li><a href="{{ route('permissions.list') }}">Quản Lý Quyền</a></li>
+                </ul>
+            </li>
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-layers menu-icon"></i><span class="nav-text">Quản Lý Sản Phẩm</span>
                 </a>
                 <ul aria-expanded="false">

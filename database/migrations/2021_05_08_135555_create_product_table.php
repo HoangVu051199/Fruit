@@ -16,9 +16,11 @@ class CreateProductTable extends Migration
         Schema::create('product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('category')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('unit');
+            $table->foreign('unit_id')->references('id')->on('unit')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
             $table->string('image');
@@ -28,6 +30,7 @@ class CreateProductTable extends Migration
             $table->tinyInteger('hot');
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

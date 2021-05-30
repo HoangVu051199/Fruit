@@ -16,11 +16,13 @@ class CreatePromotionProductTable extends Migration
         Schema::create('promotion_product', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('product_id')->references('id')->on('product')
+            ->onUpdate('cascade')->onDelete('cascade');;
             $table->dateTime('start');
             $table->dateTime('finish');
             $table->tinyInteger('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

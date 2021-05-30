@@ -2250,7 +2250,7 @@ textarea.form-control {
     display: inline-flex;
     align-items: center;
     padding-left: 0;
-    margin-right: 0.75rem;
+    margin-right: -0.25rem;
 }
 
 .form-check-inline .form-check-input {
@@ -4635,7 +4635,8 @@ input[type="button"].btn-block {
 }
 
 .card-title {
-    margin-bottom: 0.75rem;
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
 }
 
 .card-subtitle {
