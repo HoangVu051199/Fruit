@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BackendDeliveryController;
 use App\Http\Controllers\Backend\BackendCategoryController;
 use App\Http\Controllers\Backend\BackendCate_NewController;
 use App\Http\Controllers\Backend\BackendHomeController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Frontend\IntroduceController;
 use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,25 +33,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::post('/users/add', function () {
-//    \DB::table('users')->insert([
-//         'name' => 'admin',
-//         'email' => 'admin@gmail.com',
-//         'phone' => '09111458888',
-//         'birthday' => '1999-11-05',
-//         'password' => 'bcrypt(12345678)',
-//         'avatar' => 'null',
-//         'status' => '1',
-//     ]);
-// });
-
-//Route::get('/', function () {
-//   return view('welcome');
-//});
-
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 //Frontend
 
@@ -60,6 +48,8 @@ Route::group(['namespace' => 'frontend'], function () {
     Route::get('products', [ProductController::class, 'index']);
     Route::get('cate-product/{slug}', [ProductController::class, 'showCate_product_id']);
     Route::get('product-detail/{slug}', [ProductController::class, 'productDetail']);
+    Route::post('product-modal', [HomeController::class, 'productModal']);
+    Route::post('home-select-modal', [HomeController::class, 'home_select_Modal']);
 
     Route::get('news', [NewsController::class, 'index']);
     Route::get('cate-new-id/{slug}', [NewsController::class, 'showCate_new_id']);
@@ -76,6 +66,15 @@ Route::group(['namespace' => 'frontend'], function () {
     Route::get('delete-product/{session_id}', [CartController::class, 'delete_product']);
     Route::get('delete-all-product', [CartController::class, 'delete_all_product']);
 
+    // Check out
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('home.checkout');
+    Route::post('home-select-delivery', [CheckoutController::class, 'home_select_delivery']);
+    Route::post('home-total-feeship', [CheckoutController::class, 'home_total_feeship']);
+    Route::post('calculate-delivery', [CheckoutController::class, 'calculate_delivery']);
+    Route::post('home-select-feeship', [CheckoutController::class, 'select_feeship']);
+
+    // Order confirm
+    Route::post('order-confirm', [CheckoutController::class, 'order_confirm']);
 });
 
 //Backend
@@ -152,6 +151,24 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('uploadImage', [BackendProductController::class, 'uploadImage'])->name('product.uploadImage');
         });
 
+
+        Route::prefix('promotion')->group(function () {
+            Route::get('', [BackendPromotion_ProductController::class, 'index'])->name('promotion.index');
+
+            Route::get('create', [BackendPromotion_ProductController::class, 'create'])->name('promotion.create');
+            Route::post('store', [BackendPromotion_ProductController::class, 'store'])->name('promotion.store');
+            Route::post('select-product', [BackendPromotion_ProductController::class, 'select_product'])->name('promotion.select_product');
+
+            Route::get('edit/{id}', [BackendPromotion_ProductController::class, 'edit'])->name('promotion.edit');
+            Route::post('update/{id}', [BackendPromotion_ProductController::class, 'update'])->name('promotion.update');
+
+            Route::get('show/{id}', [BackendPromotion_ProductController::class, 'show'])->name('promotion.show');
+
+            Route::get('delete-promotion/{id}', [BackendPromotion_ProductController::class, 'promotion_detail']);
+
+            Route::get('delete/{id}', [BackendPromotion_ProductController::class, 'destroy'])->name('promotion.delete');
+        });
+
         Route::prefix('unit')->group(function () {
             Route::get('', [BackendUnitController::class, 'index'])->name('unit.index');
 
@@ -219,9 +236,18 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('countermand', [BackendOrderController::class, 'countermand'])->name('countermand.index');
         });
 
+        Route::prefix('feeship')->group(function(){
+            Route::get('',[BackendDeliveryController::class, 'index'])->name('feeship.list');
+            
+            Route::post('select-delivery', [BackendDeliveryController::class, 'select_delivery']);
+            Route::post('store', [BackendDeliveryController::class, 'store'])->name('feeship.store');
+
+            Route::post('/select-feeship',[BackendDeliveryController::class, 'select_feeship']);
+            Route::post('/update-delivery',[BackendDeliveryController::class, 'update_delivery']);
+        });
+
     });
 });
-// });
 
 Auth::routes();
 

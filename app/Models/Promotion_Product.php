@@ -14,6 +14,8 @@ class Promotion_Product extends Model
 
     protected $fillable=[
         'product_id',
+        'name',
+        'sale',
         'start',
         'finish',
         'status',

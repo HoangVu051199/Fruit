@@ -43,37 +43,34 @@
                               </div>
                            </div>
                         </div>
-                        <div class="cards">
-                           <h4 class="card-title">
-                              <label>
-                              <input type="checkbox" value="" class="checkbox_wrapper ml-1 mr-2">
-                              </label>
-                              CheckAll
-                           </h4>
-                        </div>
+                        
                         @foreach($permissionsParent as $permissionchild)
-                        <div class="cards border-danger">
-                           <h4 class="card-title">
+                        <div class="cards list-group" style="margin-top: -20px;">
+                           <h4 class="card-title list-group-item active">
                               <label>
                               <input type="checkbox" value="" class="checkbox_wrapper ml-1 mr-2">
                               </label>
                               {{ $permissionchild->display_name }}
                            </h4>
-                           <div class="basic-form">
+                           <div class="basic-form list-group-item">
                               <div class="form-group">
                                  @foreach($permissionchild->permissionChildrent as $item)
                                  <div class="form-check form-check-inline col-lg-3">
-                                    <label class="form-check-label">
-                                    <input type="checkbox" name="permissions[]" class="form-check-input checkbox_childrent" value="{{ $item->id }}">{{ $item->display_name }}</label>
+                                    <label class="form-check-label mt-3">
+                                    <input type="checkbox" class="form-check-input checkbox_childrent" value="{{ $item->id }}" name="permissions[]">{{ $item->display_name }}
+                                    </label>
                                  </div>
                                  @endforeach
+                                 <br/>
                               </div>
                            </div>
                         </div>
                         @endforeach
                         <div class="form-group row">
                            <div class="col-lg-8 ml-auto">
-                              <button type="submit" class="btn btn-primary">Lưu</button>
+                            <input type="button" class="btn btn-primary mt-3" id="btn1" value="Chọn tất cả"/>
+                        <input type="button" class="btn btn-danger mt-3 ml-2" id="btn2" value="Huỷ tất cả"/>
+                              <button type="submit" class="btn btn-primary mt-3 ml-2"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu dữ liệu</button>
                            </div>
                         </div>
                      </form>
@@ -85,15 +82,4 @@
    </div>
    <!-- #/ container -->
 </div>
-@endsection
-@section('js')
-<script type="text/javascript">
-   $('.checkbox_wrapper').on('click', function(){
-       $(this).parents('.cards').find('.checkbox_childrent').prop('checked', $(this).prop('checked'));
-   });
-   $('.checkboxall').on('click', function(){
-       $(this).parents().find('.checkbox_wrapper').prop('checked', $(this).prop('checked'));
-       $(this).parents().find('.checkbox_childrent').prop('checked', $(this).prop('checked'));
-   });
-</script>
 @endsection

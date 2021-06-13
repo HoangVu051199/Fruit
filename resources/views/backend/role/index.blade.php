@@ -32,7 +32,7 @@
                                           <th scope="col">STT</th>
                                           <th scope="col">Tên vai trò</th>
                                           <th scope="col" width="540px">Danh sách quyền</th>
-                                          <th scope="col" width="256px">Mô tả</th>
+                                          <th scope="col" width="250px">Mô tả</th>
                                           <th scope="col">Thao tác</th>
                                       </tr>
                                   </thead>
@@ -43,7 +43,7 @@
                                       <td>{{ $role->display_name }}</td>
                                       <td>
                                         @foreach($role->permissionsRole as $item )
-                                          <span class="badge badge-pill badge-danger">{{ $item->display_name }}</span>
+                                          <span class="badge badge-pill badge-danger mt-1">{{ $item->display_name }}</span>
                                         @endforeach
                                       </td>
                                       <td>{{ $role->description }}</td>

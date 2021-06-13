@@ -9,12 +9,12 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="slider_content">
-                                <h1>Vegetables Big Sale</h1>
-                                <h2>Fresh Farm Products</h2>
+                                <h1>Quả Tươi Thanh Mát</h1>
+                                <h2>Mịn Màng Làn Da</h2>
                                 <p>
-                                    10% certifled-organic mix of fruit and veggies. Perfect for weekly cooking and snacking!
+                                    Bạn có muốn có một làn da sáng? Vậy thì bạn nên ăn trái cây mỗi ngày! Hầu hết các loại trái cây, đặc biệt là bơ, có một lượng lớn các vitamin E làm lão hóa chậm.
                                 </p>
-                                <a href="shop.html">Read more </a>
+                                <a href="shop.html">Đọc Thêm </a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                       <h2>Sản Phẩm Nổi Bật</h2>
+                       <h2>Sản Phẩm</h2>
                     </div>
                 </div>
             </div>
@@ -97,25 +97,25 @@
                                     <input type="hidden" value="1" class="cart_quantity_{{ $item->id }}">
                                     <div class="product_thumb">
                                         <a class="primary_img" href="{{ URL::to('product-detail', $item->slug) }}"><img src="{{ $item->image }}" alt=""></a>
-                                        <div class="label_product">
+                                        <!-- <div class="label_product">
                                             <span class="label_sale">Sale</span>
                                             <span class="label_new">New</span>
-                                        </div>
+                                        </div> -->
                                         <div class="action_links">
                                             <ul>
                                                 <li class="add_to_cart" name="add_to_cart" data-id ="{{ $item->id }}"><a><span class="lnr lnr-cart"></span></a></li>
-                                                <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                                <li class="quick_button" data-id ="{{ $item->id }}"><a id="quick_modal" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
                                                  <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
                                                 <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <figcaption class="product_content">
-                                        <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->id) }}">{{ $item->name }}</a></h4>
+                                        <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">{{ $item->name }}</a></h4>
                                         <div class="price_box">
-                                            <span class="current_price">{{ number_format($item->price) }}
+                                            <span class="current_price">{{ number_format($item->price, 0, ',', '.') }}
                                                 <sup>đ</sup></span>
-                                            <span class="old_price">20.000đ</span>
+                                            <!-- <span class="old_price">20.000đ</span> -->
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -185,7 +185,7 @@
                                         <div class="action_links">
                                             <ul>
                                                 <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                                <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                                <li class="quick_button"><a href="{{ URL::to('product-modal', $item->slug) }}" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
                                                  <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
                                                 <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
                                             </ul>

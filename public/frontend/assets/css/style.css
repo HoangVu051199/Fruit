@@ -936,6 +936,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .logo img {
     max-width: 150px;
+    margin-left: 80px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1668,7 +1669,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     margin-left: 3px;
 }
 
-.main_menu nav > ul > li > a.active {
+/*.main_menu nav > ul > li > a.active {
+    color: #40A944;
+}
+
+.main_menu li { cursor:pointer; }*/
+
+.main_menu nav > ul > li.active{
     color: #40A944;
 }
 
@@ -9047,12 +9054,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .checkout_form h3 {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 30px;
     padding: 5px 10px;
     text-transform: uppercase;
     color: #ffffff;
-    background: #222222;
+    background: #40A944;
     font-weight: 500;
 }
 
@@ -9081,6 +9088,50 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .checkout_form label {
     font-weight: 500;
+    margin-right: 15px;
+    font-size: 17px;
+}
+
+#customer_name-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#customer_phone-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#customer_email-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#provinces-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#districts-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#wards-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#customer_address-error{
+    color: red;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .checkout_form label span {
@@ -9124,7 +9175,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .order_button button {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 30px;
     padding: 5px 10px;
     text-transform: capitalize;
@@ -9135,6 +9186,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     transition: 0.3s;
     margin-bottom: 0;
     border-radius: 5px;
+    text-transform: uppercase;
+    width: 557px;
+    margin-top: 25px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -9144,7 +9198,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .order_button button:hover {
-    background: #222222;
+    border: 1px solid #40A944;
+    background: #ffffff;
+    color: #40A944;
 }
 
 @media only screen and (max-width: 767px) {
@@ -9155,13 +9211,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .order-notes textarea {
     border: 1px solid #e5e5e5;
-    border-radius: 0;
-    height: 45px;
+    border-radius: 5px;
+    height: 90px;
     max-width: 100%;
     padding: 0 30px 0 20px;
     background: none;
-    font-size: 13px;
-    resize: none;
+    font-size: 16px;
+    /*resize: none;*/
     line-height: 45px;
     width: 100%;
     color: #222222;
@@ -9192,30 +9248,37 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .order_table table thead tr th {
     min-width: 50%;
-    text-align: center;
+    /*text-align: center;*/
     padding: 15px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 4px solid #ddd;
 }
 
 .order_table table tbody tr td {
     min-width: 50%;
-    text-align: center;
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
 }
 
 .order_table table tfoot tr th {
     min-width: 50%;
-    text-align: center;
+    /*text-align: center;*/
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
+    font-size: 17px;
+    color: #222222b8;
+}
+.order_table table tfoot tr th span{
+    margin-left: 50px;
+    font-weight: 500;
 }
 
 .order_table table tfoot tr td {
     min-width: 50%;
-    text-align: center;
+    /*text-align: center;*/
     padding: 15px 0;
     border-bottom: 1px solid #ddd;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .panel-default input[type="radio"] {
@@ -9223,7 +9286,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     height: 15px;
     position: relative;
     top: 2px;
-    margin-right: 10px;
 }
 
 .panel-default img {
@@ -9758,20 +9820,26 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .table-responsive table thead {
-    background: #ededed;
+    /*background: #ededed85;*/
 }
 
 .table-responsive table thead tr th {
-    text-align: center;
+    /*text-align: center;*/
+    font-size: 17px;
+    color: #40A944;
+    text-transform: uppercase;
 }
 
 .table-responsive table tbody tr td {
-    border-right: 1px solid #ededed;
+    /*border-right: 1px solid #ededed;*/
     font-weight: 500;
     text-transform: capitalize;
-    font-size: 14px;
-    text-align: center;
+    font-size: 17px;
     min-width: 150px;
+}
+.table-responsive table tbody tr td span{
+    margin-left: 50px;
+    color: #ff9600;
 }
 
 @media only screen and (max-width: 767px) {

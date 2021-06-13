@@ -1,4 +1,5 @@
 @extends('layouts.app_frontend')
+@section('Danh sản phẩm')
 @section('content')
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">

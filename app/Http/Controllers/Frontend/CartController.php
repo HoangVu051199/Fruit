@@ -21,9 +21,23 @@ class CartController extends Controller
     		$is_vaiable = 0;
     		foreach ($cart as $key => $value) {
     			if ($value['product_id'] == $data['cart_id'] ) {
-    				$is_vaiable++;
-    			}
-    		}
+                    $is_vaiable++;
+
+                    $cart_quantity = ++$value['product_quantity'];
+                    unset($cart[$key]);
+                    $cart[] = array(
+                    'session_id' => $session_id,
+                    'product_id' => $data['cart_id'],
+                    'product_name' => $data['cart_name'],
+                    'product_image' => $data['cart_image'],
+                    'product_price' => $data['cart_price'],
+                    'product_quantity' => $cart_quantity,
+                );
+                Session::put('cart', $cart);
+            }
+    				
+    	}
+
     		if ($is_vaiable == 0) {
     			$cart[] = array(
     			'session_id' => $session_id,

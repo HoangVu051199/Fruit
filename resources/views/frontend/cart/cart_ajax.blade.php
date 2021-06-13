@@ -95,16 +95,16 @@
                                 <h3>Tổng giá trị đơn hàng</h3>
                                 <div class="coupon_inner">
                                    <div class="cart_subtotal ">
-                                       <p>Vận chuyển</p>
-                                       <p class="cart_amount">Miễn phí</p>
+                                       <p>Tạm tính :</p>
+                                       <p class="cart_amount">{{ number_format($total,0,',','.') }}đ</p>
                                    </div>
 
                                    <div class="cart_subtotal">
-                                       <p>Tổng tiền</p>
+                                       <p>Tổng tiền :</p>
                                        <p class="cart_amount">{{ number_format($total,0,',','.') }}đ</p>
                                    </div>
                                    <div class="checkout_btn">
-                                       <a href="#">Thanh Toán</a>
+                                       <a href="{{ route('home.checkout')}}">Thanh Toán</a>
                                    </div>
                                 </div>
                             </div>

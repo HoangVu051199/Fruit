@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Safira – Organic food HTML Template </title>
+    <title>@yield('title', 'Trang chủ')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -40,6 +40,12 @@
     <link rel="stylesheet" href="frontend/assets/css/style.css">
     <!--modernizr min js here-->
     <script src="frontend/assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
 </head>
 <body>
 <!--header area start-->
@@ -63,14 +69,14 @@
                                         <li><a href="#">Russian</a></li>
                                     </ul>
                                 </li>
-                                <li class="currency">
+                                <!-- <li class="currency">
                                     <a href="#"> Tiền tệ <i class="icon-right ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_currency">
                                         <li><a href="#">€ Euro</a></li>
                                         <li><a href="#">£ Pound Sterling</a></li>
                                         <li><a href="#">$ US Dollar</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -114,13 +120,23 @@
                                 </ul>
                             </div>
                             <div class="header_account_list header_wishlist">
-                                <a href="wishlist.html"><span class="lnr lnr-heart"></span> <span class="item_count">3</span> </a>
+                                <a href="wishlist.html"><span class="lnr lnr-heart"></span> <span class="item_count">0</span> </a>
                             </div>
                             <div class="header_account_list  mini_cart_wrapper">
-                                <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">2</span></a>
+                                <a href="javascript:void(0)"><span class="lnr lnr-cart"></span><span class="item_count">
+                                    @if(Session::get('cart'))
+                                    @php
+                                        $count = count(Session::get('cart'));
+                                    @endphp
+                                        {{$count}}
+                                    @else
+                                        0
+                                    @endif
+                                </span></a>
                                 <!--mini cart-->
                                 <div class="mini_cart">
-                                    <div class="cart_gallery">
+                                    @if(Session::get('cart'))
+                                    <div class="cart_gallery">  
                                         <div class="cart_close">
                                             <div class="cart_text">
                                                 <h3>cart</h3>
@@ -129,40 +145,37 @@
                                                 <a href="javascript:void(0)"><i class="icon-x"></i></a>
                                             </div>
                                         </div>
+                                        @php
+                                            $total = 0;
+                                        @endphp
+                                    @foreach(Session::get('cart') as $key => $cart)
+                                    @php
+                                        $subtotal = $cart['product_price']*$cart['product_quantity'];
+                                        $total+=$subtotal;
+                                    @endphp
                                         <div class="cart_item">
                                             <div class="cart_img">
-                                                <a href="#"><img src="frontend/assets/img/s-product/product.jpg" alt=""></a>
+                                                <a href="#"><img src="{{$cart['product_image']}}" alt=""></a>
                                             </div>
                                             <div class="cart_info">
-                                                <a href="#">Primis In Faucibus</a>
-                                                <p>1 x <span> $65.00 </span></p>
+                                                <a href="#">{{ $cart['product_name'] }}</a>
+                                                <p>{{ $cart['product_quantity'] }} x <span> {{ number_format($cart['product_price'], 0, ',', '.') }}đ </span></p>
                                             </div>
                                             <div class="cart_remove">
-                                                <a href="#"><i class="icon-x"></i></a>
+                                                <a href="{{ URL::to('delete-product', $cart['session_id'])}}"><i class="icon-x"></i></a>
                                             </div>
                                         </div>
-                                        <div class="cart_item">
-                                            <div class="cart_img">
-                                                <a href="#"><img src="frontend/assets/img/s-product/product2.jpg" alt=""></a>
-                                            </div>
-                                            <div class="cart_info">
-                                                <a href="#">Letraset Sheets</a>
-                                                <p>1 x <span> $60.00 </span></p>
-                                            </div>
-                                            <div class="cart_remove">
-                                                <a href="#"><i class="icon-x"></i></a>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="mini_cart_table">
                                         <div class="cart_table_border">
                                             <div class="cart_total">
-                                                <span>Sub total:</span>
-                                                <span class="price">$125.00</span>
+                                                <span>Tạm tính:</span>
+                                                <span class="price">{{ number_format($total, 0, ',', '.') }}đ</span>
                                             </div>
                                             <div class="cart_total mt-10">
-                                                <span>total:</span>
-                                                <span class="price">$125.00</span>
+                                                <span>Tổng tiền:</span>
+                                                <span class="price">{{ number_format($total, 0, ',', '.') }}đ</span>
                                             </div>
                                         </div>
                                     </div>
@@ -171,9 +184,16 @@
                                             <a href="{{ URL::to('gio-hang')}}"><i class="fa fa-shopping-cart"></i> View cart</a>
                                         </div>
                                         <div class="cart_button">
-                                            <a href="checkout.html"><i class="fa fa-sign-in"></i> Checkout</a>
+                                            <a href="{{ URL::to('checkout')}}"><i class="fa fa-sign-in"></i> Checkout</a>
                                         </div>
                                     </div>
+                                    @else
+                                    <div class="cart_table_border">
+                                            <div class="cart_total">
+                                            <img width="299px" src="frontend/assets/img/service/empty-cart.png">
+                                    </div>
+                                </div>
+                                    @endif
                                 </div>
                                 <!--mini cart end-->
                             </div>
@@ -216,13 +236,13 @@
                         <div class="main_menu menu_position">
                             <nav>
                                 <ul>
-                                    <li>
-                                        <a class="active"  href="{{ URL::to('') }}">Trang chủ</a>
+                                    <li class="{{ Request::is('/') ? 'active' : '' }}">
+                                        <a  href="{{ URL::to('/') }}">Trang chủ</a>
                                     </li>
-                                    <li class="mega_items">
+                                    <li class="{{ Request::is('products') ? 'active' : '' }}">
                                         <a href="{{ URL::to('/products') }}">Sản phẩm</a>
                                     </li>
-                                    <li>
+                                    <li class="{{ Request::is('news') ? 'active' : '' }}">
                                         <a href="{{ URL::to('/news') }}">Tin tức<i class="fa fa-angle-down"></i></a>
                                         <ul class="sub_menu pages">
                                             @foreach($cate_new as $item)
@@ -234,10 +254,12 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li>
+                                    <li class="{{ Request::is('introduce') ? 'active' : '' }}">
                                         <a href="{{ URL::to('/introduce') }}">Giới thiệu</a>
                                     </li>
-                                    <li><a href="{{ URL::to('/contact') }}"> Liên hệ</a></li>
+                                    <li class="{{ Request::is('contact') ? 'active' : '' }}">
+                                        <a href="{{ URL::to('/contact') }}"> Liên hệ</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -245,7 +267,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="call-support">
-                            <p><a href="tel:(08)23456789">(08) 23 456 789</a> Hỗ trợ khách hàng</p>
+                            <p><a href="tel:(+84)23456789">(+84) 23 456 789</a> Hỗ trợ khách hàng</p>
                         </div>
                     </div>
                 </div>
@@ -267,7 +289,7 @@
                         <div class="footer_logo">
                             <a href="index.html"><img src="frontend/assets/img/logo/logo.png" alt=""></a>
                         </div>
-                        <p><span>Trụ sở:</span> Số nhà 24 D7, KĐT Đại Kim - Định Công, P.Đại Kim, Q.Hoàng Mai, TP.HN</p>
+                        <p><span>Trụ sở:</span> Số nhà 24 Ngô Quyền, P.Thanh Bình, TP.Hải Dương</p>
                         <p><span>Website:</span> www.hoaquafuji.com</p>
                         <p><span>Email:</span> <a href="#">demo@hasthemes.com</a></p>
                         <p><span>Hotline:</span> <a href="tel:(08)23456789">1900 2268 - 0988 444 123</a> </p>
@@ -278,12 +300,11 @@
                         <h3>CHÍNH SÁCH</h3>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="#">Delivery Information</a></li>
-                                <li><a href="#"> Privacy Policy</a></li>
-                                <li><a href="#"> Terms & Conditions</a></li>
-                                <li><a href="contact.html"> Contact Us</a></li>
-                                <li><a href="#"> Site Map</a></li>
+                                <li><a href="about.html">Chính sách bảo mật thông tin</a></li>
+                                <li><a href="#">Chính sách đổi trả</a></li>
+                                <li><a href="#">Chính sách vận chuyển</a></li>
+                                <li><a href="#"> Câu hỏi thường gặp</a></li>
+                                <li><a href="contact.html">Liên hệ</a></li>
                             </ul>
                         </div>
                     </div>
@@ -293,24 +314,21 @@
                         <h3>HỖ TRỢ MUA HÀNG</h3>
                         <div class="footer_menu">
                             <ul>
-                                <li><a href="#">aaaa</a></li>
-                                <li><a href="#">  Gift Certificates</a></li>
-                                <li><a href="#">Affiliate</a></li>
-                                <li><a href="#">Specials</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#"> Order History</a></li>
+                                <li><a href="#">Hướng dẫn mua hàng</a></li>
+                                <li><a href="#">Hệ thống cửa hàng</a></li>
+                                
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="widgets_container widget_newsletter">
-                        <h3>Sign up newsletter</h3>
-                        <p class="footer_desc">Get updates by subscribe our weekly newsletter</p>
+                        <h3>Đăng Ký</h3>
+                        <p class="footer_desc">Đăng ký để nhận những thông tin mới nhất</p>
                         <div class="subscribe_form">
                             <form id="mc-form" class="mc-form footer-newsletter" >
-                                <input id="mc-email" type="email" autocomplete="off" placeholder="Enter you email" />
-                                <button id="mc-submit">Subscribe</button>
+                                <input id="mc-email" type="email" autocomplete="off" placeholder="Nhập email của bạn" />
+                                <button id="mc-submit">Đăng ký</button>
                             </form>
                             <!-- mailchimp-alerts Start -->
                             <div class="mailchimp-alerts text-centre">
@@ -333,7 +351,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-7">
                     <div class="copyright_area">
-                        <p>Copyright  © 2020  <a href="#">Safira</a>  . All Rights Reserved.Design by  <a href="#">Safira</a></p>
+                        <p>Copyright  © 2020  <a href="#">Hoàng Vũ</a>  . Mọi quyền được bảo lưu thiết kế bởi  <a href="#">Hoàng Vũ</a></p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5">
@@ -352,121 +370,41 @@
 </footer>
 <!--footer area end-->
 <!-- modal area start-->
+
 <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"><i class="icon-x"></i></span>
-            </button>
-            <div class="modal_body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-12">
-                            <div class="modal_tab">
-                                <div class="tab-content product-details-large">
-                                    <div class="tab-pane fade show active" id="tab1" role="tabpanel" >
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="frontend/assets/img/product/productbig1.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="frontend/assets/img/product/productbig2.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="frontend/assets/img/product/productbig3.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tab4" role="tabpanel">
-                                        <div class="modal_tab_img">
-                                            <a href="#"><img src="frontend/assets/img/product/productbig4.jpg" alt=""></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal_tab_button">
-                                    <ul class="nav product_navactive owl-carousel" role="tablist">
-                                        <li >
-                                            <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false"><img src="frontend/assets/img/product/product1.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false"><img src="frontend/assets/img/product/product6.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link button_three" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false"><img src="frontend/assets/img/product/product2.jpg" alt=""></a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false"><img src="frontend/assets/img/product/product7.jpg" alt=""></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-12">
-                            <div class="modal_right">
-                                <div class="modal_title mb-10">
-                                    <h2>Donec Ac Tempus</h2>
-                                </div>
-                                <div class="modal_price mb-10">
-                                    <span class="new_price">$64.99</span>
-                                    <span class="old_price" >$78.99</span>
-                                </div>
-                                <div class="modal_description mb-15">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae </p>
-                                </div>
-                                <div class="variants_selects">
-                                    <div class="variants_size">
-                                        <h2>size</h2>
-                                        <select class="select_option">
-                                            <option selected value="1">s</option>
-                                            <option value="1">m</option>
-                                            <option value="1">l</option>
-                                            <option value="1">xl</option>
-                                            <option value="1">xxl</option>
-                                        </select>
-                                    </div>
-                                    <div class="variants_color">
-                                        <h2>color</h2>
-                                        <select class="select_option">
-                                            <option selected value="1">purple</option>
-                                            <option value="1">violet</option>
-                                            <option value="1">black</option>
-                                            <option value="1">pink</option>
-                                            <option value="1">orange</option>
-                                        </select>
-                                    </div>
-                                    <div class="modal_add_to_cart">
-                                        <form action="#">
-                                            <input min="1" max="100" step="2" value="1" type="number">
-                                            <button type="submit">add to cart</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal_social">
-                                    <h2>Share this product</h2>
-                                    <ul>
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                        <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"><i class="icon-x"></i></span>
+                </button>
+                <div class="modal_body">
+                    
                 </div>
             </div>
         </div>
-    </div>
 </div>
+
+<div class="main_menu menu_position">
+        <!-- <div class="banks"> -->
+            <nav>
+            <ul>
+                <li class="{{ Request::is('/') ? 'active' : '' }}">
+                    <a href="{{URL::to('/')}}">Trang chủ</a>
+                </li>
+                <li class="{{ Request::is('products') ? 'active' : '' }}">
+                    <a href="{{URL::to('/products')}}">Sản phẩm</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- </div> -->
+</div>
+    
 <!-- modal area end-->
 <!-- JS
    ============================================ -->
 <!--jquery min js-->
-<script src="frontend/assets/js/vendor/jquery-3.4.1.min.js"></script>
-<!--popper min js-->
+<!-- <script src="frontend/assets/js/vendor/jquery-3.4.1.min.js"></script>
+ --><!--popper min js-->
 <script src="frontend/assets/js/popper.js"></script>
 <!--bootstrap min js-->
 <script src="frontend/assets/js/bootstrap.min.js"></script>
@@ -530,14 +468,211 @@
                       confirmButtonText: "Xem giỏ hàng",
                       closeOnConfirm: false
                     },
-                    function(){
-                        window.location.href = "{{ url('/gio-hang') }}";
+                    function(isConfirm){
+                        if (isConfirm) {
+                            window.location.href = "{{ url('/gio-hang') }}";
+                    }else{
+                        location.reload();
+                    }
                     });
+                }
+            });
+        });
+        
+        $('.choose').on('change',function(){
+            var action = $(this).attr('id');
+            var ma_id = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            var result = '';
+            // alert(action);
+            // alert(ma_id);
+            // alert(_token);
+
+            if(action=='provinces'){
+                result = 'districts';
+            }else{
+                result = 'wards';
+            }
+            $.ajax({
+                url : '{{url('/home-select-delivery')}}',
+                method: 'POST',
+                data:{action:action,ma_id:ma_id,_token:_token},
+                success:function(data){
+                   $('#'+result).html(data);     
                 }
             });
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // fetch_delivery();
+        // fetch_total();
+
+        function fetch_delivery(){
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url : '{{url('/home-select-feeship')}}',
+                method: 'POST',
+                data:{_token:_token},
+                success:function(data){
+                   $('#load_delivery').html(data);
+                }
+            });
+        }
+
+        function fetch_total(){
+            var _token = $('input[name="_token"]').val();
+             $.ajax({
+                url : '{{url('/home-total-feeship')}}',
+                method: 'POST',
+                data:{_token:_token},
+                success:function(data){
+                   $('#order_total').html(data);
+                }
+            });
+        }
+
+        $('.calculate_delivery').on('change', function(){
+            var matp = $('.provinces').val();
+            var maqh = $('.districts').val();
+            var xaid = $('.wards').val();
+            var _token = $('input[name="_token"]').val();
+
+            $.ajax({
+                url : '{{url('/calculate-delivery')}}',
+                method: 'POST',
+                data:{matp:matp,maqh:maqh,xaid:xaid,_token:_token},
+                success:function(data){
+                    fetch_delivery(); 
+                    fetch_total();
+                }
+            });
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#frmError').validate({
+            rules:{
+                customer_name: "required",
+                customer_phone:{
+                    required: true,
+                    number:true,
+                    minlength:10,
+                    maxlength:10,
+                }, 
+                customer_email:{
+                    required: true,
+                    email:true,
+                },
+                provinces: "required",
+                districts: "required",
+                wards: "required",
+                customer_address: "required",
+            },
+            messages: {
+                customer_name: "Vui lòng nhập họ và tên",
+                customer_phone: {
+                    required: "Vui lòng nhập số điện thoại",
+                    number:"Số điện thoại không hợp lệ",
+                    minlength:"Số điện thoại không hợp lệ",
+                    maxlength:"Số điện thoại không hợp lệ"
+                },
+                customer_email:{
+                    required: "Vui lòng nhập email",
+                    email: "Vui lòng nhập địa một chỉ email hợp lệ"
+                },
+                provinces: "Vui lòng chọn tỉnh",
+                districts: "Vui lòng chọn huyện",
+                wards: "Vui lòng chọn xã",
+                customer_address: "Vui lòng nhập địa chỉ",
+            }
+        });
+
+        $('.order_confirm').click(function(){
+            var customer_name = $('.customer_name').val();
+            var customer_phone = $('.customer_phone').val();
+            var customer_email = $('.customer_email').val();
+            var customer_address = $('.customer_address').val();
+            var customer_note = $('.customer_note').val();
+            var provinces_id = $('.provinces').val();
+            var districts_id = $('.districts').val();
+            var wards_id = $('.wards').val();
+            var payment_method = $('#payment').val();
+            var feeship = $('.feeship').text();
+            var _token = $('input[name="_token"]').val();
+           if ($('#frmError').valid()) {
+            $.ajax({
+                url : '{{url('/order-confirm')}}',
+                method: 'POST',
+                data:{customer_name:customer_name,customer_phone:customer_phone,customer_email:customer_email,customer_address:customer_address,customer_note:customer_note,provinces_id:provinces_id,districts_id:districts_id,wards_id:wards_id,payment_method:payment_method,feeship:feeship,_token:_token},
+                success:function(data){
+                    swal("Đơn hàng!", "Cảm ơn bạn! Đơn hàng của bạn đã được nhận.", "success")
+                    },
+            });
+            
+            window.setTimeout(function(){
+                window.location.href = "{{ url('/') }}";
+            }, 3000);
+            }
+        });
+
+    });    
+</script>
+
+<script type="text/javascript">
+    $('document').ready(function(){ 
+
+        $('.quick_button').click(function(){
+            var id = $(this).data('id');
+            var cart_id = $('.cart_id_' + id).val();
+            var cart_name = $('.cart_name_' + id).val();
+            var cart_image = $('.cart_image_' + id).val();
+            var cart_price = $('.cart_price_' + id).val();
+            var cart_quantity = $('.cart_quantity_' + id).val();
+            var _token = $('input[name="_token"]').val();
+
+            // alert(id);
+            // alert(cart_id);
+            // alert(cart_name);
+            // alert(cart_image);
+            // alert(cart_price);
+            // alert(cart_quantity);
+            // alert(_token);
+
+            $.ajax({
+                url: '{{ url('/home-select-modal') }}',
+                method:'POST',
+                data:{
+                    cart_id:cart_id,
+                    cart_name:cart_name,
+                    cart_image:cart_image,
+                    cart_price:cart_price,
+                    cart_quantity:cart_quantity,
+                    _token:_token,
+                },
+                success:function(data){
+                    $('.modal_body').html(data);
+                }
+        });
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+
+    $('.main_menu li').click(function() {
+        $(this).siblings('li').removeClass('active');
+        $(this).addClass('active');
+    });
+
+</script>
+
 </body>
 <!-- Mirrored from demo.hasthemes.com/safira-preview/safira/index-5.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 19 Nov 2020 09:03:33 GMT -->
 </html>

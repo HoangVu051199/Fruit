@@ -65,4 +65,5 @@ class ProductController extends Controller
 
     	return view('frontend.product.product_detail', compact('cate_product','cate_new', 'recent_posts', 'product_detail', 'related_product', 'image_product'));
     }
+
 }

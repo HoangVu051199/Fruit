@@ -32,25 +32,15 @@
                     </td>
                     <td style="text-transform: capitalize">{{ $item->name }}</td>
                     <td style="text-transform: capitalize">
-                        <?php $category = DB::table('category')->where('id',$item->category_id)->first(); ?>
-                        @if (!empty($category->name))
-                            {!! $category->name !!}
-                        @else
-                            {!! NULL !!}
-                        @endif
+                        {{ $item->category->name }}
                     </td>
                     <td class="text-danger">{{ number_format($item->price, 0,'.','.') }}</td>
                     <td style="text-transform: capitalize">
-                        <?php $unit = DB::table('unit')->where('id',$item->unit_id)->first(); ?>
-                        @if (!empty($unit->name))
-                            {!! $unit->name !!}
-                        @else
-                            {!! NULL !!}
-                        @endif
+                        {{ $item->unit->name }}
                     </td>
                     <td>
-                                                <span class="label gradient-1 btn-rounded">
-                                                    @if($item->hot == 0)
+                        <span class="label gradient-1 btn-rounded">
+                            @if($item->hot == 0)
                                                         Ẩn
                                                     @else
                                                         Hiển thị

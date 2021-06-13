@@ -50,8 +50,7 @@
                               </label>
                               CheckAll</h4> -->
                         </div>
-                        <input type="button" class="btn mb-1 btn-primary" id="btn1" value="Chọn tất cả"/>
-                        <input type="button" class="btn mb-1 btn-danger" id="btn2" value="Huỷ tất cả"/>
+                        
                         @foreach($permissionsParent as $permissionchild)
                         <div class="cards list-group" style="margin-top: -20px;">
                            <h4 class="card-title list-group-item active">
@@ -76,7 +75,9 @@
                         @endforeach
                         <div class="form-group row">
                            <div class="col-lg-8 ml-auto">
-                              <button type="submit" class="btn btn-primary">Lưu dữ liệu</button>
+                            <input type="button" class="btn btn-primary mt-3" id="btn1" value="Chọn tất cả"/>
+                        <input type="button" class="btn btn-danger mt-3 ml-2" id="btn2" value="Huỷ tất cả"/>
+                              <button type="submit" class="btn btn-primary mt-3 ml-2"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu dữ liệu</button>
                            </div>
                         </div>
                      </form>
@@ -88,42 +89,4 @@
    </div>
    <!-- #/ container -->
 </div>
-@endsection
-@section('js')
-<script type="text/javascript">
-   $('.checkbox_wrapper').on('click', function(){
-       $(this).parents('.cards').find('.checkbox_childrent').prop('checked', $(this).prop('checked'));
-   });
-   $('.checkboxall').on('click', function(){
-       $(this).parents().find('.checkbox_wrapper').prop('checked', $(this).prop('checked'));
-       $(this).parents().find('.checkbox_childrent').prop('checked', $(this).prop('checked'));
-   });
-   // Check
-    
-               // Chức năng chọn hết
-               document.getElementById("btn1").onclick = function () 
-               {
-                   // Lấy danh sách checkbox
-                   var checkboxes = document.getElementsByName('permissions[]');
-    
-                   // Lặp và thiết lập checked
-                   for (var i = 0; i < checkboxes.length; i++){
-                       checkboxes[i].checked = true;
-                   }
-               };
-    
-               // Chức năng bỏ chọn hết
-               document.getElementById("btn2").onclick = function () 
-               {
-                   // Lấy danh sách checkbox
-                   var checkboxes = document.getElementsByName('permissions[]');
-    
-                   // Lặp và thiết lập Uncheck
-                   for (var i = 0; i < checkboxes.length; i++){
-                       checkboxes[i].checked = false;
-                   }
-               };
-    
-     
-</script>
 @endsection

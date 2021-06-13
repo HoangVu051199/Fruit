@@ -145,7 +145,7 @@
                         </div>
                         <div class="form-group row">
                            <div class="col-lg-8 ml-auto">
-                              <button type="submit" name="submit" value="{{ isset($users) ? 'update' : '' }}" class="btn btn-primary">Lưu</button>
+                              <button type="submit" name="submit" value="{{ isset($users) ? 'update' : '' }}" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu dữ liệu</button>
                            </div>
                         </div>
                      </form>

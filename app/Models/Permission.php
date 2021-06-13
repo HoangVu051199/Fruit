@@ -16,7 +16,7 @@ class Permission extends EntrustPermission
         'name',
         'display_name',
         'description',
-        'group_permission_id',
+        'parent_id',
         'createa_at',
         'updated_at',
     ];
@@ -25,5 +25,8 @@ class Permission extends EntrustPermission
     {
         return $this->hasMany(Permission::class, 'parent_id');
     } 
-
+    public function permission()
+    {
+        return $this->hasMany(Permission::class, 'parent_id');
+    }
 }

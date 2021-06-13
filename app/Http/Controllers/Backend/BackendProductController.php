@@ -15,27 +15,25 @@ class BackendProductController extends Controller
     public function index()
     {
 
-        $category = Category::first();
-
         $product = Product::orderBy('id', 'asc')->get();
 
-        return view('backend.product.index', compact('product', 'category'));
+        return view('backend.product.index', compact('product'));
     }
 
     public function create()
     {
-        $user = Auth::User();
+        // $user = Auth::User();
 
-        if($user->hasPermission('xem-sản-phẩm'))
-        {
+        // if($user->hasPermission('xem-sản-phẩm'))
+        // {
         $category = Category::all();
 
         $unit = Unit::all();
 
         return view('backend.product.create', compact('category', 'unit'));
-        }
+        // }
 
-        return view('backend.error.403');
+        // return view('backend.error.403');
     }
 
     public function store(BackendProductRequest $request)

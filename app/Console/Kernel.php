@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use DB;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +27,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->call(function () {
+        //     DB::table('promotion_product')->whereRaw('finish = now()')->update(['status' => 1]);
+        // })->everyMinute();
+        $schedule->call(function () {
+        DB::table('promotion_product')->whereRaw('finish <= now()')->update(['status' => 1])->everyMinute();
+        });
     }
 
     /**

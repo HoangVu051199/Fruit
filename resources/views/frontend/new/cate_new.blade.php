@@ -1,4 +1,5 @@
-@extends('layouts.app_frontend');
+@extends('layouts.app_frontend')
+@section('title','Danh mục tin tức')
 @section('content')
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">

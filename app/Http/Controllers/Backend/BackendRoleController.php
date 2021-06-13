@@ -11,10 +11,10 @@ use Illuminate\Support\Str;
 class BackendRoleController extends Controller
 {
 
-    // public function __construct(Permission $permission)
-    // {
-    //     $this->permission =$permission;
-    // }
+    public function __construct(Permission $permission)
+    {
+        $this->permission =$permission;
+    }
     
 
     public function index()

@@ -1,4 +1,5 @@
 @extends('layouts.app_frontend')
+@section('title','Chi tiết tin tức')
 @section('content')
         <!--blog body area start-->
     <div class="blog_details">
