@@ -12,48 +12,39 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên người đặt</th>
+                <th scope="col">Email</th>
                 <th scope="col">Số điện thoại</th>
-                <th scope="col">Tổng tiền</th>
                 <th scope="col">Ngày đặt</th>
-                <th scope="col">Ghi chú</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">Thao tác</th>
             </tr>
             </thead>
             <tbody>
-            <?php $key = 1 ?>
-            @foreach($confirmation as $item)
+            @foreach($confirmation as $key => $item)
                 @if($item->status == 0)
                 <tr>
-                    <td>{{ $key++ }}</td>
-                    <td style="text-transform: capitalize">{{ $item->name }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->total }}</td>
+                    <td>{{ ++$key }}</td>
+                    <td style="text-transform: capitalize">{{ $item->customer_name }}</td>
+                    <td>{{ $item->customer_email }}</td>
+                    <td>{{ $item->customer_phone }}</td>
                     <td>{{ $item->created_at }}</td>
-                    <td>{{ $item->note }}</td>
                     <td>
                         <span class="label gradient-1 btn-rounded">
-                            @if($item->status == 0)
-                                Chờ xác nhận
-                            @else
-                                {{ NULL }}
-                            @endif
+                            Đang giao
                         </span>
                     </td>
-                    {{--                                            <td>--}}
-                    {{--                                            <span>--}}
-                    {{--                                                <a href="{{ route('confirmation.edit', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">--}}
-                    {{--                                                    <i class="fa fa-pencil color-muted m-r-5"></i>--}}
-                    {{--                                                </a>--}}
-                    {{--                                                <a href="{{ route('confirmation.show', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">--}}
-                    {{--                                                    <i class="fa fa-eye color-danger ml-3"></i>--}}
-                    {{--                                                </a>--}}
-                    {{--                                            </span>--}}
-                    {{--                                            </td>--}}
-                </tr>
-                @else
-                    {{ NULL }}
-                @endif
+                    <td>
+                    <span>
+                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">
+                    <i class="fa fa-pencil color-muted m-r-5"></i>
+                    </a>
+                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">
+                    <i class="fa fa-eye color-danger ml-3"></i>
+                    </a>
+                    </span>
+                    </td>
+                </tr> 
+                @endif   
             @endforeach
             </tbody>
         </table>

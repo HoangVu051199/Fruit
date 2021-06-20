@@ -14,14 +14,20 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'shipping_id',
-        'payment_id',
-        'name',
-        'email',
-        'phone',
-        'address',
-        'note',
+        'customer_name',
+        'customer_email',
+        'customer_phone',
+        'customer_address',
+        'customer_note',
+        'payment_method',
+        'provinces_id',
+        'districts_id',
+        'wards_id',
         'status',
-        'total',
     ];
+
+    public function order_detail()
+    {
+        return $this->hasMany(Order_Detail::class);
+    }
 }

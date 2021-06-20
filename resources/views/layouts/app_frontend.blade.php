@@ -40,11 +40,9 @@
     <link rel="stylesheet" href="frontend/assets/css/style.css">
     <!--modernizr min js here-->
     <script src="frontend/assets/js/vendor/modernizr-3.7.1.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+    <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script> -->
+
 
 </head>
 <body>
@@ -69,14 +67,6 @@
                                         <li><a href="#">Russian</a></li>
                                     </ul>
                                 </li>
-                                <!-- <li class="currency">
-                                    <a href="#"> Tiền tệ <i class="icon-right ion-ios-arrow-down"></i></a>
-                                    <ul class="dropdown_currency">
-                                        <li><a href="#">€ Euro</a></li>
-                                        <li><a href="#">£ Pound Sterling</a></li>
-                                        <li><a href="#">$ US Dollar</a></li>
-                                    </ul>
-                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -113,11 +103,38 @@
                     <div class="col-lg-4 col-md-6 col-sm-7 col-8">
                         <div class="header_account_area">
                             <div class="header_account_list register">
+                            @if(Auth::user())
+                            <div class="language_currency">
                                 <ul>
-                                    <li><a href="login.html">Đăng ký</a></li>
+                                @if(Auth::user()->hasRole(['admin']))
+                                <li><a href="{{ URL::to('admin') }}">Dashboard</a></li>
+                                @endif
+                                <li class="language">
+                                    <a> {{ Auth::user()->name }} <i class="icon-right ion-ios-arrow-down"></i></a>
+                                    <ul class="dropdown_language">
+                                        <li><a href="#">Thông tin</a></li>
+                                        <li><a href="{{URL::to('user-order')}}">Đơn Mua</a></li>
+                                        <li>
+                                        <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        Đăng xuất</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                    </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                                </div>    
+                                    @else
+                                    <ul>
+                                    <li><a href="{{ route('register') }}">Đăng ký</a></li>
                                     <li><span>/</span></li>
-                                    <li><a href="login.html">Đăng nhập</a></li>
-                                </ul>
+                                    <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                                    </ul>
+                                    @endif
+                                
                             </div>
                             <div class="header_account_list header_wishlist">
                                 <a href="wishlist.html"><span class="lnr lnr-heart"></span> <span class="item_count">0</span> </a>
@@ -372,39 +389,26 @@
 <!-- modal area start-->
 
 <div class="modal fade" id="modal_box" tabindex="-1" role="dialog"  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true"><i class="icon-x"></i></span>
                 </button>
                 <div class="modal_body">
                     
-                </div>
+                </div>    
             </div>
         </div>
-</div>
+    </div>
 
-<div class="main_menu menu_position">
-        <!-- <div class="banks"> -->
-            <nav>
-            <ul>
-                <li class="{{ Request::is('/') ? 'active' : '' }}">
-                    <a href="{{URL::to('/')}}">Trang chủ</a>
-                </li>
-                <li class="{{ Request::is('products') ? 'active' : '' }}">
-                    <a href="{{URL::to('/products')}}">Sản phẩm</a>
-                </li>
-            </ul>
-        </nav>
-        <!-- </div> -->
-</div>
     
 <!-- modal area end-->
 <!-- JS
    ============================================ -->
 <!--jquery min js-->
-<!-- <script src="frontend/assets/js/vendor/jquery-3.4.1.min.js"></script>
- --><!--popper min js-->
+<script src="frontend/assets/js/vendor/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+ <!--popper min js-->
 <script src="frontend/assets/js/popper.js"></script>
 <!--bootstrap min js-->
 <script src="frontend/assets/js/bootstrap.min.js"></script>
@@ -445,7 +449,7 @@
             var cart_price = $('.cart_price_' + id).val();
             var cart_quantity = $('.cart_quantity_' + id).val();
             var _token = $('input[name="_token"]').val();
-
+            
             $.ajax({
                 url: '{{ url('/add-cart-ajax') }}',
                 method:'POST',
@@ -635,14 +639,6 @@
             var cart_price = $('.cart_price_' + id).val();
             var cart_quantity = $('.cart_quantity_' + id).val();
             var _token = $('input[name="_token"]').val();
-
-            // alert(id);
-            // alert(cart_id);
-            // alert(cart_name);
-            // alert(cart_image);
-            // alert(cart_price);
-            // alert(cart_quantity);
-            // alert(_token);
 
             $.ajax({
                 url: '{{ url('/home-select-modal') }}',

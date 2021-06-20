@@ -12,46 +12,40 @@
             <tr>
                 <th scope="col">STT</th>
                 <th scope="col">Tên người đặt</th>
+                <th scope="col">Email</th>
                 <th scope="col">Số điện thoại</th>
-                <th scope="col">Tổng tiền</th>
                 <th scope="col">Ngày đặt</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col">Thao tác</th>
             </tr>
             </thead>
             <tbody>
-            <?php $key = 1 ?>
+                <?php $key=1; ?>
             @foreach($order as $item)
                 @if($item->status == 2)
                 <tr>
                     <td>{{ $key++ }}</td>
-                    <td style="text-transform: capitalize">{{ $item->name }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>{{ $item->total }}</td>
-                    <td>{{ $item->created_at }}</td>
+                    <td style="text-transform: capitalize">{{ $item->customer_name }}</td>
+                    <td>{{ $item->customer_email }}</td>
+                    <td>{{ $item->customer_phone }}</td>
+                    <td>2021-06-15 09:04:27</td>
                     <td>
                         <span class="label gradient-1 btn-rounded">
-                            @if($item->status == 2)
-                                Đã giao
-                            @else
-                                {{ NULL }}
-                            @endif
+                            Đã giao
                         </span>
                     </td>
-                    {{--                                            <td>--}}
-                    {{--                                            <span>--}}
-                    {{--                                                <a href="{{ route('orders.edit', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">--}}
-                    {{--                                                    <i class="fa fa-pencil color-muted m-r-5"></i>--}}
-                    {{--                                                </a>--}}
-                    {{--                                                <a href="{{ route('orders.show', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">--}}
-                    {{--                                                    <i class="fa fa-eye color-danger ml-3"></i>--}}
-                    {{--                                                </a>--}}
-                    {{--                                            </span>--}}
-                    {{--                                            </td>--}}
-                </tr>
-                @else
-                    {{ NULL }}
-                @endif
+                    <td>
+                    <span>
+                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">
+                    <i class="fa fa-pencil color-muted m-r-5"></i>
+                    </a>
+                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">
+                    <i class="fa fa-eye color-danger ml-3"></i>
+                    </a>
+                    </span>
+                    </td>
+                </tr> 
+                @endif  
             @endforeach
             </tbody>
         </table>

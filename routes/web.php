@@ -75,6 +75,9 @@ Route::group(['namespace' => 'frontend'], function () {
 
     // Order confirm
     Route::post('order-confirm', [CheckoutController::class, 'order_confirm']);
+
+    // User Order
+    Route::get('user-order', [HomeController::class, 'user_order']);
 });
 
 //Backend

@@ -29,10 +29,10 @@ class BackendOrderController extends Controller
     public function orders()
     {
 
-        $orders = Order::orderBy('id', 'DESC')->where('status', 2)
+        $order = Order::orderBy('id', 'DESC')->where('status', 2)
             ->get();
 
-        return view('backend.order.order', compact('orders'));
+        return view('backend.order.order', compact('order'));
     }
 
     public function countermand()

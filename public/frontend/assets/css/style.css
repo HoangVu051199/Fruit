@@ -12130,11 +12130,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .modal_title h2 {
-    font-size: 16px;
+    font-size: 17px;
     text-transform: uppercase;
     font-weight: 600;
     margin-bottom: 14px;
     line-height: 26px;
+    color: #40A944;
 }
 
 .modal_social h2 {
@@ -12234,6 +12235,22 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     margin-bottom: 7px;
     line-height: 20px;
 }
+.variants_size lable {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    line-height: 20px;
+}
+.variants_size span {
+    line-height: 24px;
+    font-size: 15px;
+    margin: 0;
+    text-transform: capitalize;
+}
+.variants_size p {
+    margin-bottom: 15px;
+}
 
 .variants_size.mb-15, .mb-15.variants_color {
     margin-bottom: 24px;
@@ -12270,16 +12287,17 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .modal_add_to_cart form button {
     background: none;
-    border: 1px solid #222222;
+    border: 1px solid #40A944;
+    border-radius: 3px;
     margin-left: 10px;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 500;
     height: 45px;
     width: 230px;
     line-height: 18px;
     padding: 10px 15px;
     text-transform: uppercase;
-    background: #222222;
+    background: #40A944;
     color: #ffffff;
     -webkit-transition: 0.3s;
     transition: 0.3s;
@@ -12293,8 +12311,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .modal_add_to_cart form button:hover {
-    background: #40A944;
-    color: #ffffff;
+    background: #fff;
+    color: #40A944;
     border-color: #40A944;
 }
 

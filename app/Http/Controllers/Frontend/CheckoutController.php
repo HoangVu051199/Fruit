@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Cate_New;
 use App\Models\Provinces;
@@ -13,7 +14,6 @@ use App\Models\Feeship;
 use App\Models\Order;
 use App\Models\Order_Detail;
 use Session;
-session_start();
 
 class CheckoutController extends Controller
 {
@@ -102,14 +102,13 @@ class CheckoutController extends Controller
         $data = $request->all();
 
         $order = new Order();
-
-        if (Session::get('customer')) {
-            $order->user_id = Session::get('customer');
+        
+        if (Auth::user()) {
+            $order->user_id = Auth::user()->id;
         }else{
             $order->user_id = NULL;
         }
-        $order_code = substr(md5(microtime()),rand(0,26),5);
-        $order->order_code = $order_code;
+
         $order->customer_name = $data['customer_name'];
         $order->customer_phone = $data['customer_phone'];
         $order->customer_email = $data['customer_email'];
@@ -122,9 +121,11 @@ class CheckoutController extends Controller
 
         $order->save();
 
+        $order_code = substr(md5(microtime()),rand(0,26),5);
 
         foreach (Session::get('cart') as $key => $cart) {
             $order_detail = new Order_Detail();
+            $order_detail->order_id = $order->id;
             $order_detail->order_code = $order_code;
             $order_detail->product_id = $cart['product_id'];
             $order_detail->product_name = $cart['product_name'];

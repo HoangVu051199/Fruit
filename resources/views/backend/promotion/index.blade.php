@@ -34,6 +34,7 @@
                                  <th scope="col">Mức giảm</th>
                                  <th scope="col">Thời gian bắt đầu</th>
                                  <th scope="col">Thời gian kết thúc</th>
+                                 <th scope="col">Trạng thái</th>
                                  <th scope="col">Thao tác</th>
                               </tr>
                            </thead>
@@ -51,6 +52,13 @@
                                  </td>
                                  <td>{{ $item->start }}</td>
                                  <td>{{ $item->finish }}</td>
+                                 <td>
+                                    @if($item->status == 0)
+                                       Đang khuyến mãi
+                                    @else
+                                       Đã hết hạn
+                                    @endif
+                                 </td>
                                  <td>
                                     <span>
                                     <a href="{{ route('promotion.show', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xem">
