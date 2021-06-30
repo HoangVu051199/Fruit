@@ -10,6 +10,7 @@ use App\Models\Detail_Promotion;
 use App\Models\Category;
 use App\Models\Product;
 use Carbon\Carbon;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BackendPromotion_ProductController extends Controller
 {
@@ -24,13 +25,15 @@ class BackendPromotion_ProductController extends Controller
     public function create()
     {
         $category = Category::get();
+        $promotion = Promotion_Product::get();
 
-        return view("backend.promotion.create", compact('category'));
+        return view("backend.promotion.create", compact('category','promotion'));
     }
 
 
     public function store(BackendPromotion_ProductRequest $request)
     {
+        
         $promotion = new Promotion_Product();
 
         $promotion->name = $request->name;
@@ -91,6 +94,7 @@ class BackendPromotion_ProductController extends Controller
 
     public function update(BackendPromotion_ProductRequest $request, $id)
     {
+        if($request->start < $request->finish){
 
         $promotion = Promotion_Product::find($id);
 
@@ -99,6 +103,15 @@ class BackendPromotion_ProductController extends Controller
         $promotion->sale = $request->sale;
         $promotion->start = $request->start;
         $promotion->finish = $request->finish;
+        $date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d\TH:i');
+    
+        if ($request->finish <= $date ) {
+            
+            $promotion->status = 0;
+        }else{
+            
+            $promotion->status = 1;
+        }
 
         if ($promotion->save()) {
             if(!empty($request->product_id)){
@@ -116,7 +129,11 @@ class BackendPromotion_ProductController extends Controller
         }
 
         return redirect()->route('promotion.index');
+    }else{
+       
+        return redirect()->back()->with('Thời gian bắt đầu và kết thúc không hợp lệ', 'error');    
     }
+}
 
 
     public function promotion_detail($id)

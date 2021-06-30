@@ -106,7 +106,7 @@
                             @if(Auth::user())
                             <div class="language_currency">
                                 <ul>
-                                @if(Auth::user()->hasRole(['admin']))
+                                @if(Auth::user()->hasRole(['admin','khach-hang']))
                                 <li><a href="{{ URL::to('admin') }}">Dashboard</a></li>
                                 @endif
                                 <li class="language">
@@ -557,7 +557,7 @@
     });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
 
         $('#frmError').validate({
@@ -609,6 +609,9 @@
             var payment_method = $('#payment').val();
             var feeship = $('.feeship').text();
             var _token = $('input[name="_token"]').val();
+
+            alert(payment_method);
+
            if ($('#frmError').valid()) {
             $.ajax({
                 url : '{{url('/order-confirm')}}',
@@ -625,8 +628,38 @@
             }
         });
 
+        $('.payment_online').click(function(){
+            var customer_name = $('.customer_name').val();
+            var customer_phone = $('.customer_phone').val();
+            var customer_email = $('.customer_email').val();
+            var customer_address = $('.customer_address').val();
+            var customer_note = $('.customer_note').val();
+            var provinces_id = $('.provinces').val();
+            var districts_id = $('.districts').val();
+            var wards_id = $('.wards').val();
+            var payment_method = $('#payment_online').val();
+            var feeship = $('.feeship').text();
+            var total = $('.total').text();
+            var _token = $('input[name="_token"]').val();
+
+           if ($('#frmError').valid()) {
+            $.ajax({
+                url : '{{url('/order-confirm')}}',
+                method: 'POST',
+                data:{customer_name:customer_name,customer_phone:customer_phone,customer_email:customer_email,customer_address:customer_address,customer_note:customer_note,provinces_id:provinces_id,districts_id:districts_id,wards_id:wards_id,payment_method:payment_method,feeship:feeship,total:total,_token:_token},
+                success:function(data){
+                    // swal("Đơn hàng!", "Cảm ơn bạn! Đơn hàng của bạn đã được nhận.", "success")
+                    },
+            });
+            
+            // window.setTimeout(function(){
+            //     window.location.href = "{{ url('/') }}";
+            // }, 3000);
+            }
+        });
+
     });    
-</script>
+</script> -->
 
 <script type="text/javascript">
     $('document').ready(function(){ 

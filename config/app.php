@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Shanmuga\LaravelEntrust\LaravelEntrustServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
 
     ],
 
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'LaravelEntrust'   => Shanmuga\LaravelEntrust\Facades\LaravelEntrustFacade::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
 
 
     ],

@@ -158,11 +158,14 @@
 
     <!--product area start-->
     <div class="product_area product_deals mb-65">
+
+        @foreach($promotion as $pro)
+        @if($pro->status == 1 && $pro->start <= now('Asia/Ho_Chi_Minh'))
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section_title">
-                       <h2>Sản Phẩm Khuyến Mãi</h2>
+                        <h2>{{ $pro->name }}</h2>
                     </div>
                 </div>
             </div>
@@ -170,16 +173,16 @@
                <div class="row">
                    <div class="col-12">
                         <div class="product_carousel product_column5 owl-carousel">
-                            @foreach($promotion as $item)
+                            @foreach($pro->detail_promotion as $item)
                             <article class="single_product">
                                 <form>
                                     @csrf
                                 <figure>
-                                    <input type="hidden" value="{{ $item->id }}" class="cart_id_{{ $item->id }}">
-                                    <input type="hidden" value="{{ $item->name }}" class="cart_name_{{ $item->id }}">
-                                    <input type="hidden" value="{{ $item->image }}" class="cart_image_{{ $item->id }}">
-                                    <input type="hidden" value="{{ $item->price }}" class="cart_price_{{ $item->id }}">
-                                    <input type="hidden" value="1" class="cart_quantity_{{ $item->id }}">
+                                    <input type="hidden" value="{{ $item->product_id }}" class="cart_id_{{ $item->product_id }}">
+                                    <input type="hidden" value="{{ $item->product->name }}" class="cart_name_{{ $item->product_id }}">
+                                    <input type="hidden" value="{{ $item->product->image }}" class="cart_image_{{ $item->product_id }}">
+                                    <input type="hidden" value="{{ $item->product->price }}" class="cart_price_{{ $item->product_id }}">
+                                    <input type="hidden" value="1" class="cart_quantity_{{ $item->product_id }}">
                                     <div class="product_thumb">
                                         <a class="primary_img" href="product-details.html"><img src="{{ $item->product->image }}" alt=""></a>
                                         <div class="label_product">
@@ -187,27 +190,25 @@
                                                 {{ $item->promotion->sale }}%
                                             </span>
                                         </div>
-                                        <div class="product_timing">
-                                            <div data-countdown="2021/12/15"></div>
-                                        </div>
+                                        
                                         <div class="action_links">
                                             <ul>
-                                                <li class="add_to_cart" name="add_to_cart" data-id ="{{ $item->id }}"><a><span class="lnr lnr-cart"></span></a></li>
-                                                <li class="quick_button" data-id ="{{ $item->id }}"><a id="quick_modal" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                                <li class="add_to_cart" name="add_to_cart" data-id ="{{ $item->product_id }}"><a><span class="lnr lnr-cart"></span></a></li>
+                                                <li class="quick_button" data-id ="{{ $item->product_id }}"><a id="quick_modal" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
                                                  <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
                                                 <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <figcaption class="product_content">
-                                        <h4 class="product_name"><a href="product-details.html">
+                                        <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">
                                             {{ $item->product->name }}
                                         </a></h4>
                                         <div class="price_box">
                                             <span class="current_price">
                                                 <?php 
                 $sale = $item->product->price*((100 - $item->promotion->sale)/100);
-                                              echo number_format($sale, 0, ',', '.');  
+                            echo number_format($sale, 0, ',', '.');  
                                                 ?>đ
                                             </span>
                                             <span class="old_price">
@@ -224,6 +225,8 @@
                 </div>
             </div>
         </div>
+        @endif
+        @endforeach
     </div>
     <!--product area end-->
 

@@ -26,11 +26,11 @@
                     <div class="blog_sidebar_widget">
                         <div class="widget_list widget_search">
                             <div class="widget_title">
-                                <h3>Search</h3>
+                                <h3>Tìm kiếm</h3>
                             </div>
                             <form action="#">
                                 <input placeholder="Search..." type="text">
-                                <button type="submit">search</button>
+                                <button type="submit">Tìm kiếm</button>
                             </form>
                         </div>
                         <div class="widget_list widget_categories">
@@ -64,7 +64,7 @@
                             @endforeach
                         </div>
 
-                        <div class="widget_list widget_tag">
+                        <!-- <div class="widget_list widget_tag">
                             <div class="widget_title">
                                 <h3>Tag products</h3>
                             </div>
@@ -75,7 +75,7 @@
                                     <li><a href="#">euro</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-12">
@@ -106,19 +106,13 @@
     </div>
     <!--blog area end-->
     <!--blog pagination area start-->
-    <div class="blog_pagination">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="pagination">
-                        <ul>
-                            <li class="current">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li class="next"><a href="#">next</a></li>
-                            <li><a href="#">>></a></li>
-                        </ul>
-                    </div>
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <div class="col-12 shop_toolbar t_bottom">
+                <div class="pagination">
+                    <ul>
+                        {{ $new->links() }}
+                    </ul>
                 </div>
             </div>
         </div>

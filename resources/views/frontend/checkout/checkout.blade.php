@@ -23,7 +23,7 @@
     <div class="Checkout_section mt-70">
        <div class="container">
             <div class="checkout_form">
-                <form id="frmError">
+                <form  action="{{ URL::to('order-confirm') }}" method="POST">
                         @csrf
                 <div class="row">
                     
@@ -35,14 +35,29 @@
                                 <div class="col-lg-6 mb-20">
                                     <label>Họ và tên <span>*</span></label>
                                     <input type="text" class="form-control customer_name" name="customer_name"  placeholder="Họ và tên">
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('customer_name'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('customer_name') }}</small>
+                                 @endif
+                              </div>
                                 </div>
                                 <div class="col-lg-6 mb-20">
                                     <label>Số điện thoại  <span>*</span></label>
                                     <input type="text" class="form-control customer_phone" name="customer_phone" placeholder="Số điện thoại" > 
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('customer_phone'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('customer_phone') }}</small>
+                                 @endif
+                              </div>
                                 </div>
                                 <div class="col-12 mb-20">
                                     <label>Email <span>*</span></label>
-                                    <input type="text" class="form-control customer_email" name="customer_email" placeholder="Email" >     
+                                    <input type="text" class="form-control customer_email" name="customer_email" placeholder="Email" >  
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('customer_email'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('customer_email') }}</small>
+                                 @endif
+                              </div>   
                                 </div>
                                 <div class="col-12 mb-20">
                                     <label for="country">Tỉnh / Thành Phố <span>*</span></label>
@@ -52,29 +67,49 @@
                                        <option value="{{ $item->matp }}">{{ $item->name }}</option> 
                                        @endforeach     
                                     </select>
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('provinces'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('provinces') }}</small>
+                                 @endif
+                              </div>
                                 </div>                          
                                 <div class="col-12 mb-20">
                                     <label for="country">Quận / Huyện <span>*</span></label>
 
                                     <select class="form-select districts choose" name="districts" id="districts" > 
                                           <option value="">__Chọn Quận / Huyện__</option>
-                                    </select>   
+                                    </select> 
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('districts'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('districts') }}</small>
+                                 @endif
+                              </div>  
                                 </div> 
                                  <div class="col-12 mb-20">
                                     <label for="country">Phường / Xã <span>*</span></label>
                                     <select class="form-select wards calculate_delivery" name="wards" id="wards" > 
                                             <option value="">__Chọn Phường / Xã__</option>
-                                    </select>   
+                                    </select> 
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('wards'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('wards') }}</small>
+                                 @endif
+                              </div>  
                                 </div>   
                                 <div class="col-12 mb-20">
                                     <label>Địa chỉ giao hàng  <span>*</span></label>
-                                    <input class="form-control customer_address" placeholder="Số nhà, Tên đường" name="customer_address" type="text" >     
+                                    <input class="form-control customer_address" placeholder="Số nhà, Tên đường" name="customer_address" type="text" >
+                                    <div id="val-username-error" class="invalid-feedback animated fadeInDown" style="display: block;">
+                                 @if($errors->first('customer_address'))
+                                 <small id="emailHelp" class="form-text text-danger">{{ $errors->first('customer_address') }}</small>
+                                 @endif
+                              </div>     
                                 </div>
                                 
                                 <div class="col-12">
                                     <div class="order-notes">
                                          <label for="order_note">Ghi chú</label>
-                                        <textarea class="customer_note" id="textarea" placeholder="Ghi chú khác của quý khách"></textarea>
+                                        <textarea name="customer_note" class="customer_note" id="textarea" placeholder="Ghi chú khác của quý khách"></textarea>
                                     </div>   
                                 </div>     	    	    	    	    	    	  
                             </div>
@@ -130,7 +165,7 @@
                                 </table>     
                             </div>
                             <div class="payment_method">
-                               <div class="panel-default">
+                               <!-- <div class="panel-default">
                                		<label>
                                		Phương thức thanh toán:
                                		</label>
@@ -138,10 +173,17 @@
                                     <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">COD</label>
                                     <input id="payment" value="1" name="check_method" type="radio" data-target="createp_account" />
                                     <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">PAYPAL</label>
-
-                                </div> 
+                                    <div>
+                                        @php
+                                            $vnd_to_usd = $total/23023;
+                                        @endphp
+                                        <div id="paypal-button"></div>
+                                        <input type="hidden" id="vnd_to_usd" value="{{ round($vnd_to_usd, 2) }}">
+                                    </div>
+                                </div>  -->
                                 <div class="order_button">
-                                    <button  type="button" class="order_confirm">Đặt Hàng</button> 
+                                    <button  type="submit" name="payment_method" class="order_confirm" id="payment" value="0">Thanh toán khi nhận hàng</button>
+                                    <button  type="submit" name="payment_method" value="1" class="payment_online">Thanh toán online</button> 
                                 </div>    
                             </div>  
                     </div>

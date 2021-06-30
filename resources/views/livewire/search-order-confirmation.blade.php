@@ -20,17 +20,19 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($confirmation as $key => $item)
+                <?php $key=1; ?>
+            @foreach($confirmation as $item)
+
                 @if($item->status == 0)
                 <tr>
-                    <td>{{ ++$key }}</td>
+                    <td>{{ $key++ }}</td>
                     <td style="text-transform: capitalize">{{ $item->customer_name }}</td>
                     <td>{{ $item->customer_email }}</td>
                     <td>{{ $item->customer_phone }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
                         <span class="label gradient-1 btn-rounded">
-                            Đang giao
+                            Chờ xử lý
                         </span>
                     </td>
                     <td>

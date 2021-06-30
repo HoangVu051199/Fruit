@@ -36,9 +36,9 @@
                     </td>
                     <td>
                     <span>
-                    <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">
+                    <!-- <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">
                     <i class="fa fa-pencil color-muted m-r-5"></i>
-                    </a>
+                    </a> -->
                     <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Chi tiết">
                     <i class="fa fa-eye color-danger ml-3"></i>
                     </a>
@@ -50,4 +50,5 @@
             </tbody>
         </table>
     </div>
+    {{ $countermand->links('livewire.livewire-pagination') }}
 </div>

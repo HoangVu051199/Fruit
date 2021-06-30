@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
-                       <h3>Cart</h3>
+                       <h3>Giỏ hàng</h3>
                         <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li>Shopping Cart</li>
+                            <li><a href="index.html">Trang chủ</a></li>
+                            <li>Giỏ hàng</li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                     	<td class="product_thumb"><a href="#"><img src="{{ $value['product_image'] }}" alt=""></a></td>
                                     	<td class="product_name"><a href="#">{{ $value['product_name'] }}</a></td>
                                     	<td class="product-price">{{ number_format($value['product_price'], 0,',','.') }}đ</td>
-                                    	<td class="product_quantity"><label>Số lượng</label> <input min="1" max="100" name="product_quantity[{{$value['session_id']}}]" value="{{ $value['product_quantity'] }}" type="number"></td>
+                                    	<td class="product_quantity"><label>Số lượng</label> <input min="1"  name="product_quantity[{{$value['session_id']}}]" value="{{ $value['product_quantity'] }}" type="number"></td>
                                     	<td class="product_total">{{ number_format($subtotal, 0,',','.') }}đ</td>
 
                                 </tr>

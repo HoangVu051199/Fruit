@@ -6888,9 +6888,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .pagination ul li {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 38px;
+    /*height: 30px;
+    line-height: 30px;*/
     text-align: center;
     background: #f1f1f1;
     border-radius: 3px;
@@ -7097,18 +7097,19 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     padding: 0 30px;
     height: 42px;
     line-height: 40px;
-    background: #222;
+    background: #40A944;
     color: #fff;
     border-radius: 30px;
     width: inherit;
     font-size: 14px;
     font-weight: 600;
     text-transform: capitalize;
-    border-color: #222;
+    border-color: #40A944;
 }
 
 .list_action_right ul li.add_to_cart a:hover {
-    background: #40A944;
+    background: #fff;
+    color: #40A944;
 }
 
 @media only screen and (max-width: 767px) {
@@ -7637,6 +7638,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     line-height: 42px;
     text-transform: capitalize;
     min-width: 270px;
+    border: 1px solid #40A944;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -7659,7 +7661,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 
 .product_variant.quantity button:hover {
-    background: #3E444A;
+    background: #fff;
+    color: #40A944;
 }
 
 .product_variant.color {
@@ -8044,6 +8047,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .s-tab-zoom.owl-carousel .owl-nav div.owl-next {
     right: -7px;
     left: auto;
+}
+
+.product_content .quantity input{
+    width: 80px;
+    border: 1px solid #eee;
+    border-radius: 3px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -9071,6 +9080,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     padding: 0 20px;
     color: #222222;
 }
+.total{
+    margin-left: 80px;
+    font-weight: 500;
+}
 
 .checkout_form .nice-select {
     width: 100%;
@@ -9178,16 +9191,16 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     font-size: 18px;
     line-height: 30px;
     padding: 5px 10px;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
     color: #ffffff;
     background: #40A944;
     font-weight: 500;
     -webkit-transition: 0.3s;
     transition: 0.3s;
     margin-bottom: 0;
-    border-radius: 5px;
-    text-transform: uppercase;
-    width: 557px;
+    border-radius: 25px;
+    /*text-transform: uppercase;*/
+    width: 274px;
     margin-top: 25px;
 }
 

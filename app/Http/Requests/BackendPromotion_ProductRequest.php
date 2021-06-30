@@ -24,12 +24,12 @@ class BackendPromotion_ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required',
+            'name'        => 'required|unique:promotion_product,name,'.$this->id,
             'product_id'  => 'required',
             'type_sale'   => 'required',
             'sale'   => 'required',
             'start'       => 'required',
-            'finish'      => 'required|after_or_equal:start',
+            'finish'      => 'required|date|after:tomorrow',
         ];
     }
 
@@ -37,12 +37,13 @@ class BackendPromotion_ProductRequest extends FormRequest
     {
         return [
             'name.required' => 'Dữ liệu không được để trống',
+            'name.unique' => 'Dữ liệu đã tồn tại',
             'product_id.required' => 'Dữ liệu không được để trống',
             'type_sale.required' => 'Dữ liệu không được để trống',
             'sale.required' => 'Dữ liệu không được để trống',
             'start.required'      => 'Dữ liệu không được để trống',
             'finish.required'     => 'Dữ liệu không được để trống',
-            'finish.after_or_equal:start'     => 'Dữ liệu không hợp lệ',
+            'finish.after'     => 'Ngày nhập phải sau ngày đã cho',
         ];
     }
 }

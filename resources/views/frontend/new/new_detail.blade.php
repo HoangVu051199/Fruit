@@ -47,18 +47,7 @@
                             @endforeach
                         </div>
 
-                        <div class="widget_list widget_tag">
-                            <div class="widget_title">
-                                <h3>Tag products</h3>
-                            </div>
-                            <div class="tag_widget">
-                                <ul>
-                                    <li><a href="#">asian</a></li>
-                                    <li><a href="#">brown</a></li>
-                                    <li><a href="#">euro</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-12">
@@ -79,25 +68,6 @@
                                     <div class="post_content">
                                         <p>{{ $new_detail->content }}</p>
                                     </div>
-                                    <div class="entry_content">
-                                        <div class="post_meta">
-                                            <span>Tags: </span>
-                                            <span><a href="#">, fashion</a></span>
-                                            <span><a href="#">, t-shirt</a></span>
-                                            <span><a href="#">, white</a></span>
-                                        </div>
-
-                                        <div class="social_sharing">
-                                            <p>share this post:</p>
-                                            <ul>
-                                                <li><a href="#" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a href="#" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                                                <li><a href="#" title="google+"><i class="fa fa-google-plus"></i></a></li>
-                                                <li><a href="#" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                </figcaption>
                             </figure>
                         </article>
@@ -109,10 +79,10 @@
                                     <article class="single_related">
                                         <figure>
                                             <div class="related_thumb">
-                                                <a href="{{ URL::to('new-detail', $item->id) }}"><img src="{{ $item->image }}" alt=""></a>
+                                                <a href="{{ URL::to('new-detail', $item->slug) }}"><img src="{{ $item->image }}" alt=""></a>
                                             </div>
                                             <figcaption class="related_content">
-                                               <h4><a href="{{ URL::to('new-detail', $item->id) }}">{{ $item->title }}</a></h4>
+                                               <h4><a href="{{ URL::to('new-detail', $item->slug) }}">{{ $item->title }}</a></h4>
                                                <div class="blog_meta">                                        
                                                     <span class="author">By : <a href="#">admin</a> / </span>
                                                     <span class="meta_date"> {{ $item->created_at }} </span>
@@ -124,7 +94,7 @@
                                 @endforeach
                             </div>
                        </div> 
-                        <div class="comments_box">
+                        <!-- <div class="comments_box">
                             <h3>3 Comments  </h3>
                             <div class="comment_list">
                                 <div class="comment_thumb">
@@ -198,7 +168,7 @@
                                 </div>
                                 <button class="button" type="submit">Post Comment</button>
                              </form>    
-                        </div>
+                        </div> -->
                     </div>
                     <!--blog grid area start-->
                 </div>

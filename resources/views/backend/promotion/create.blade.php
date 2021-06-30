@@ -87,8 +87,9 @@
                               {{ $cate->name }}
                            </h4>
                            <div class="basic-form list-group-item">
-                              <div class="form-group">
+                              <div class="form-group">               
                                  @foreach($cate->product as $item)
+                                 
                                  <div class="form-check form-check-inline col-lg-3">
                                     <label class="form-check-label mt-3">
                                     <input type="checkbox" class="form-check-input checkbox_childrent" value="{{ $item->id }}" name="product_id[]"> 

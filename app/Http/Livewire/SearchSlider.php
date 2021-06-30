@@ -17,7 +17,7 @@ class SearchSlider extends Component
     {
         $searchTerm = '%'. $this->searchTerm .'%';
         $slider = Slider::where('position', 'LIKE', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(1);
+            ->orderBy('id', 'ASC')->paginate(10);
 
         return view('livewire.search-slider',[
             'slider' => $slider

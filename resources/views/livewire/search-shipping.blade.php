@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <tbody>
-                <?php $key=0; ?>
+                <?php $key=1; ?>
             @foreach($shipping as $item)
                 @if($item->status == 1)
                 <tr>

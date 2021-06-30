@@ -54,9 +54,9 @@
                                  <td>{{ $item->finish }}</td>
                                  <td>
                                     @if($item->status == 0)
-                                       Đang khuyến mãi
-                                    @else
                                        Đã hết hạn
+                                    @else      
+                                       Đang khuyến mãi
                                     @endif
                                  </td>
                                  <td>

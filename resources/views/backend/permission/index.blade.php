@@ -17,9 +17,9 @@
                <div class="card-body">
                   <div>
                      <h4 class="card-title">
-                        <span class="mr-1">Quyền</span>/
-                        <a href="{{ route('permissions.create') }}" class="btn mb-1 btn-primary">Thêm<span class="btn-icon ml-2"><i class="fa fa-plus"></i></span>
-                        </a>
+                        <span class="mr-1">Danh Sách Quyền</span>
+                        <!-- <a href="{{ route('permissions.create') }}" class="btn mb-1 btn-primary">Thêm<span class="btn-icon ml-2"><i class="fa fa-plus"></i></span>
+                        </a> -->
                         <div class="col-lg-3 float-right">
                            <input type="search" class="form-control rounded" placeholder="Tìm kiếm theo vị trí..." wire:model="searchTerm"
                               aria-label="Search Dashboard">
@@ -32,7 +32,7 @@
                                  <th scope="col">STT</th>
                                  <th scope="col">Tên quyền</th>
                                  <th scope="col">Mô tả</th>
-                                 <th scope="col">Thao tác</th>
+                                 
                               </tr>
                            </thead>
                            <tbody>
@@ -41,7 +41,7 @@
                                  <th scope="row">{{ ++$key }}</th>
                                  <td>{{ $item->display_name }}</td>
                                  <td>{{ $item->description }}</td>
-                                 <td>
+                                 <!-- <td>
                                     <span>
                                     <a href="{{ route('permissions.edit', $item->id) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sửa">
                                     <i class="fa fa-pencil color-muted m-r-5"></i>
@@ -50,7 +50,7 @@
                                     <i class="fa fa-close color-danger ml-3"></i>
                                     </a>
                                     </span>
-                                 </td>
+                                 </td> -->
                               </tr>
                               @endforeach
                            </tbody>

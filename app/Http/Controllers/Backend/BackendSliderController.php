@@ -10,9 +10,7 @@ class BackendSliderController extends Controller
 {
     public function index()
     {
-        $slider = Slider::orderBy('id', 'asc')->get();
-
-        return view('backend.slider.index', compact('slider'));
+        return view('backend.slider.index');
     }
 
     public function create()

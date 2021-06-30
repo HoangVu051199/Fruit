@@ -7,6 +7,7 @@
                     <i class="icon-home menu-icon"></i><span class="nav-text">Trang Chủ</span>
                 </a>
             </li>
+            @if(Auth::user()->hasRole(['admin']))
             <li class="mega-menu mega-menu-sm">
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-user menu-icon"></i><span class="nav-text">Phân Quyền</span>
@@ -61,6 +62,24 @@
                     <li><a href="{{ route('countermand.index') }}">Đơn Hàng Huỷ</a></li>
                 </ul>
             </li>
+            @else
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-layers menu-icon"></i><span class="nav-text">Quản Lý Sản Phẩm</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('product.index') }}">Sản Phẩm</a></li>
+                </ul>
+            </li>
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-book-open menu-icon"></i><span class="nav-text">Quản Lý Tin Tức</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('new.index') }}">Bài Viết</a></li>
+                </ul>
+            </li>
+            @endif
         </ul>
     </div>
 </div>

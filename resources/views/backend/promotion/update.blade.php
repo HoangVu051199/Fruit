@@ -10,6 +10,7 @@
          </ol>
       </div>
    </div>
+   {!! Toastr::message() !!}
    <!-- row -->
    <div class="container-fluid">
       <div class="row justify-content-center">

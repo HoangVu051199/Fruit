@@ -13,7 +13,14 @@ class Payment extends Model
     protected $table='payment';
 
     protected $fillable=[
-        'method',
-        'status',
+        'order_id',
+        'user_id',
+        'money',
+        'code',
+        'note',
+        'vnp_response_code',
+        'code_vnpay',
+        'code_bank',
+        'time',
     ];
 }

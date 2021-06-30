@@ -16,7 +16,7 @@ class NewsController extends Controller
 
         $cate_new = Cate_New::all();
 
-        $new = News::orderBy('id', 'asc')->paginate(9);
+        $new = News::orderBy('id', 'asc')->paginate(3);
 
         $recent_posts = News::orderByDesc('created_at')->paginate(3);
 
@@ -50,7 +50,7 @@ class NewsController extends Controller
         $cate_id = Cate_New::where('slug', $slug)->first();
         
         $cate_new_id = DB::table('news')
-        ->where('catenew_id',$cate_id->id)->paginate(9);
+        ->where('catenew_id',$cate_id->id)->paginate(1);
 
         return view('frontend.new.cate_new',compact('cate_new_id','cate_new','recent_posts', 'cate_product', 'cate_id'));
     }

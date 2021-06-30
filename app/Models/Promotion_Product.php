@@ -13,11 +13,16 @@ class Promotion_Product extends Model
     protected $table='promotion_product';
 
     protected $fillable=[
-        'product_id',
         'name',
         'sale',
+        'type_sale',
         'start',
         'finish',
         'status',
     ];
+
+    public function detail_promotion()
+    {
+        return $this->hasMany(Detail_Promotion::class, 'promotion_id');
+    }
 }

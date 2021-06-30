@@ -44,14 +44,19 @@
 			</div>
 			<div class="col-lg-6 col-md-6">
 				<div class="product_d_right ml-5">
-					<form action="#">
-
+					<form>
+						@csrf
+						<input type="hidden" value="{{ $product_detail->id }}" class="cart_id_{{ $product_detail->id }}">
+                        <input type="hidden" value="{{ $product_detail->name }}" class="cart_name_{{ $product_detail->id }}">
+                        <input type="hidden" value="{{ $product_detail->image }}" class="cart_image_{{ $product_detail->id }}">
+                        <input type="hidden" value="{{ $product_detail->price }}" class="cart_price_{{ $product_detail->id }}">
+                        <!-- <input type="hidden" value="1" class="cart_quantity_{{ $product_detail->id }}"> -->
 						<h1 style="color: green;">{{ $product_detail->name }}</h1>
 						
 						<div class="price_box">
 							<p><span>Giá</span>:
 							<span class="current_price">{{ number_format($product_detail->price) }}<sup>đ</sup></span>
-							<span class="old_price"><sub>80.000<sup>đ</sup></sub></span>
+							<!-- <span class="old_price"><sub>80.000<sup>đ</sup></sub></span> -->
 							</p>
 						</div>
 						<div class="price_box">
@@ -80,8 +85,9 @@
 						</div> -->
 						<div class="product_variant quantity">
 							<label>Số lượng</label>
-							<input min="1" max="100" value="1" type="number"><br><br>
-							<button class="button" type="submit">add to cart</button>
+							<input type="number" min="1" value="1" class="cart_quantity_{{ $product_detail->id }}">
+							<br><br>
+							<button class="button add_to_cart" name="add_to_cart" data-id ="{{ $product_detail->id }}" type="button">Thêm giỏ hàng</button>
 						</div>
 					</form>
 				</div>
@@ -102,9 +108,9 @@
 							<li >
 								<a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Mô tả</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Bình luận</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<div class="tab-content">
@@ -219,31 +225,39 @@
 				<div class="product_carousel product_column5 owl-carousel">
 					@foreach($related_product as $item)
 					<article class="single_product">
-						<figure>
-							<div class="product_thumb">
-								<a class="primary_img" href="{{ URL::to('product-detail', $item->slug) }}">
-								<img src="{{ $item->image }}" alt=""></a>
-								<div class="label_product">
-									<span class="label_sale">Sale</span>
-									<span class="label_new">New</span>
-								</div>
-								<div class="action_links">
-									<ul>
-										<li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-										<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
-										<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>  
-										<li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
-									</ul>
-								</div>
-							</div>
-							<figcaption class="product_content">
-								<h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">{{ $item->name }}</a></h4>
-								<div class="price_box"> 
-									<span class="current_price">{{ number_format($item->price) }}<sup>đ</sup></span>
-									<span class="old_price">$235.00</span>
-								</div>
-							</figcaption>
-						</figure>
+						<form>
+                                    @csrf
+                                <figure>
+                                    <input type="hidden" value="{{ $item->id }}" class="cart_id_{{ $item->id }}">
+                                    <input type="hidden" value="{{ $item->name }}" class="cart_name_{{ $item->id }}">
+                                    <input type="hidden" value="{{ $item->image }}" class="cart_image_{{ $item->id }}">
+                                    <input type="hidden" value="{{ $item->price }}" class="cart_price_{{ $item->id }}">
+                                    <input type="hidden" value="1" class="cart_quantity_{{ $item->id }}">
+                                    <div class="product_thumb">
+                                        <a class="primary_img" href="{{ URL::to('product-detail', $item->slug) }}"><img src="{{ $item->image }}" alt=""></a>
+                                        <!-- <div class="label_product">
+                                            <span class="label_sale">Sale</span>
+                                            <span class="label_new">New</span>
+                                        </div> -->
+                                        <div class="action_links">
+                                            <ul>
+                                                <li class="add_to_cart" name="add_to_cart" data-id ="{{ $item->id }}"><a><span class="lnr lnr-cart"></span></a></li>
+                                                <!-- <li class="quick_button" data-id ="{{ $item->id }}"><a id="quick_modal" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                                 <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
+                                                <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <figcaption class="product_content">
+                                        <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">{{ $item->name }}</a></h4>
+                                        <div class="price_box">
+                                            <span class="current_price">{{ number_format($item->price, 0, ',', '.') }}
+                                                <sup>đ</sup></span>
+                                            <!-- <span class="old_price">20.000đ</span> -->
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </form>
 					</article>
 					@endforeach
 				</div>

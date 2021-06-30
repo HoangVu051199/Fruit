@@ -16,12 +16,12 @@ class SearchOrderConfirmation extends Component
     public function render()
     {
         $searchTerm = '%'. $this->searchTerm .'%';
-        $confirmation = Order::where('customer_name', 'LIKE', $searchTerm)
+        $confirmation = Order::Where('customer_name', 'LIKE', $searchTerm)
             ->orWhere('customer_email', 'LIKE', $searchTerm)
             ->orWhere('customer_phone', 'LIKE', $searchTerm)
             ->orWhere('customer_address', 'LIKE', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(5);
-
+            ->orderBy('id', 'ASC')->paginate(15);
+            
         return view('livewire.search-order-confirmation',[
             'confirmation' => $confirmation
         ]);

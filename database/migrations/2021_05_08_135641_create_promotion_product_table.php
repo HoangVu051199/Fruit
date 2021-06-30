@@ -15,9 +15,9 @@ class CreatePromotionProductTable extends Migration
     {
         Schema::create('promotion_product', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product')
-            ->onUpdate('cascade')->onDelete('cascade');;
+            $table->string('name');
+            $table->float('sale');
+            $table->tinyInteger('type_sale');
             $table->dateTime('start');
             $table->dateTime('finish');
             $table->tinyInteger('status');

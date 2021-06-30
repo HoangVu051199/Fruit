@@ -24,16 +24,18 @@ class HomeController extends Controller
 
         $cate_product = Category::all();
 
-        $slider = Slider::all();
-
         $product = Product::all();
+
+        $slider = Slider::orderBy('position', 'ASC')->get();
 
         $recent_posts = News::orderByDesc('created_at')->paginate(3);
 
         // $promotion = DB::table('detail_promotion')
         // ->join('promotion_product', 'promotion_product.id', '=', 'detail_promotion.promotion_id')->get();
 
-        $promotion = Detail_Promotion::get();
+        // dd($promotion);
+
+        $promotion = Promotion_Product::get();
 
         return view('frontend.home.index', compact('cate_new','cate_product','slider','product', 'recent_posts','promotion' ));
     }

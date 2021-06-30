@@ -18,19 +18,22 @@ class CreateOrderTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('shipping_id');
-            $table->foreign('shipping_id')->references('id')->on('shipping')
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->string('customer_phone', 11);
+            $table->string('customer_address');
+            $table->longText('customer_note');
+            $table->tinyInteger('payment_method');
+            $table->unsignedBigInteger('provinces_id');
+            $table->foreign('provinces_id')->references('matp')->on('provinces')
             ->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('payment_id');
-            $table->foreign('payment_id')->references('id')->on('payment')
+            $table->unsignedBigInteger('districts_id');
+            $table->foreign('districts_id')->references('id')->on('districts')
             ->onUpdate('cascade')->onDelete('cascade');
-            $table->string('name');
-            $table->string('email');
-            $table->integer('phone');
-            $table->string('address');
-            $table->longText('note')->nullable();
+            $table->unsignedBigInteger('wards_id');
+            $table->foreign('wards_id')->references('id')->on('wards')
+            ->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('status');
-            $table->float('total');
             $table->timestamps();
             $table->softDeletes();
         });

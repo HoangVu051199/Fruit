@@ -9,6 +9,7 @@
                    aria-label="Search Dashboard">
         </div>
     </h4>
+    {!! Toastr::message() !!}
     <div class="table-responsive">
         <table class="table header-border table-hover verticle-middle">
             <thead>

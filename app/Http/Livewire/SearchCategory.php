@@ -17,7 +17,7 @@ class SearchCategory extends Component
     {
         $searchTerm = '%' . $this->searchTerm . '%';
         $category = Category::where('name', 'like', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(1);
+            ->orderBy('id', 'ASC')->paginate(5);
         return view('livewire.search-category', [
             'category' => $category
         ]);

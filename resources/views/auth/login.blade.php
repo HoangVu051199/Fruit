@@ -39,23 +39,21 @@
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
                         <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                        
                         <span class="focus-input100"></span>
                     </div>
-
+                    <div class="mb-2">
+                        @if($errors->first('email'))
+                        <small id="emailHelp" class="form-text text-danger">{{ $errors->first('email') }}</small>
+                        @endif
+                    </div>
                     <div class="wrap-input100 validate-input" data-validate = "Please enter password">
                         <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" placeholder="Mật khẩu" required autocomplete="current-password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                         <span class="focus-input100"></span>
+                    </div>
+                    <div class="mb-2">
+                        @if($errors->first('password'))
+                        <small id="emailHelp" class="form-text text-danger">{{ $errors->first('password') }}</small>
+                        @endif
                     </div>
 
                     <div class="text-right p-t-13 p-b-23">

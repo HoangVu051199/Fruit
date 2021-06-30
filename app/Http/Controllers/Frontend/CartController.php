@@ -19,11 +19,15 @@ class CartController extends Controller
     	$cart = Session::get('cart');
     	if ($cart == true) {
     		$is_vaiable = 0;
+            
     		foreach ($cart as $key => $value) {
     			if ($value['product_id'] == $data['cart_id'] ) {
                     $is_vaiable++;
-
+                    if ($data['cart_quantity'] > 1) {
+                       $cart_quantity = $data['cart_quantity'] + $value['product_quantity'];
+                    }else{
                     $cart_quantity = ++$value['product_quantity'];
+                    }
                     unset($cart[$key]);
                     $cart[] = array(
                     'session_id' => $session_id,

@@ -78,6 +78,10 @@ Route::group(['namespace' => 'frontend'], function () {
 
     // User Order
     Route::get('user-order', [HomeController::class, 'user_order']);
+
+    //Payment online
+    Route::post('payment/online', [CheckoutController::class, 'createPayment'])->name('payment.online');
+     Route::get('vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');
 });
 
 //Backend
@@ -236,7 +240,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('order-confirmation', [BackendOrderController::class, 'orderConfirmation'])->name('order-confirmation.index');
             Route::get('shipping', [BackendOrderController::class, 'shipping'])->name('shipping.index');
             Route::get('orders', [BackendOrderController::class, 'orders'])->name('order.index');
+
             Route::get('countermand', [BackendOrderController::class, 'countermand'])->name('countermand.index');
+            Route::get('edit/{id}', [BackendHomeController::class, 'edit']);
+            Route::post('update/{id}', [BackendHomeController::class, 'update']);
+             Route::get('show/{id}', [BackendHomeController::class, 'show']);
         });
 
         Route::prefix('feeship')->group(function(){

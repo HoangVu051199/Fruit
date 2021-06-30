@@ -15,8 +15,19 @@ class CreatePaymentTable extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
-            $table->string('method');
-            $table->tinyInteger('status');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('order')
+            ->onUpdate('cascade')->onDelete('cascade');;
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');;
+            $table->float('money');
+            $table->string('code', 20);
+            $table->string('note');
+            $table->string('vnp_response_code');
+            $table->string('code_vnpay');
+            $table->string('code_bank');
+            $table->date('time');
             $table->timestamps();
             $table->softDeletes();
         });

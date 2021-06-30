@@ -18,7 +18,7 @@ class SearchUnit extends Component
         $searchTerm = '%'. $this->searchTerm .'%';
         $unit = Unit::where('name', 'LIKE', $searchTerm)
             ->orWhere('description', 'LIKE', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(1);
+            ->orderBy('id', 'ASC')->paginate(5);
 
         return view('livewire.search-unit',[
             'unit' => $unit

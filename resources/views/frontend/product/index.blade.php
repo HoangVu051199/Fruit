@@ -101,19 +101,26 @@
                 <div class="row shop_wrapper">
                     @foreach($product as $item)
                     <div class="col-lg-4 col-md-4 col-sm-6 col-12 ">
+                        <form>
+                        @csrf
                         <div class="single_product">
+                            
+                        <input type="hidden" value="{{ $item->id }}" class="cart_id_{{ $item->id }}">
+                        <input type="hidden" value="{{ $item->name }}" class="cart_name_{{ $item->id }}">
+                        <input type="hidden" value="{{ $item->image }}" class="cart_image_{{ $item->id }}">
+                        <input type="hidden" value="{{ $item->price }}" class="cart_price_{{ $item->id }}">
                             <div class="product_thumb">
                                 <a class="primary_img" href="{{ URL::to('product-detail', $item->slug) }}"><img src="{{ $item->image }}" alt=""></a>
-                                <div class="label_product">
+                                <!-- <div class="label_product">
                                     <span class="label_sale">Sale</span>
                                     <span class="label_new">New</span>
-                                </div>
+                                </div> -->
                                 <div class="action_links">
                                     <ul>
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"><span class="lnr lnr-cart"></span></a></li>
-                                        <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                        <li class="add_to_cart"><a href="cart.html" title="Thêm giỏ hàng"><span class="lnr lnr-cart"></span></a></li>
+                                        <!-- <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
                                         <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
-                                        <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -121,43 +128,45 @@
                                 <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">{{ $item->name }}</a></h4>
                                 <div class="price_box">
                                     <span class="current_price">{{ number_format($item->price)}}<sup>đ</sup></span>
-                                    <span class="old_price">$362.00</span>
+                                    <!-- <span class="old_price">$362.00</span> -->
                                 </div>
                             </div>
                             <div class="product_content list_content">
                                 <h4 class="product_name"><a href="{{ URL::to('product-detail', $item->slug) }}">{{$item->name}}</a></h4>
                                 <div class="price_box">
                                     <span class="current_price">{{ number_format($item->price) }}<sup>đ</sup></span>
-                                    <span class="old_price">$362.00</span>
+                                    <!-- <span class="old_price">$362.00</span> -->
+
+                                </div>
+                                <div class="quantity mt-2 mb-2">
+                                    <label>Số lượng</label>
+                            <input type="number" min="1" value="1" class="cart_quantity_{{ $item->id }}">
                                 </div>
                                 <div class="product_desc">
                                     <p>{{ $item->description}}</p>
                                 </div>
                                 <div class="action_links list_action_right">
                                     <ul>
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart">Add to Cart</a></li>
-                                        <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
+                                        <li class="add_to_cart" name="add_to_cart" data-id ="{{ $item->id }}"><a >Thêm giỏ hàng</a></li>
+                                        <!-- <li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box"  title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>
                                         <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>
-                                        <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li>
+                                        <li class="compare"><a href="#" title="Add to Compare"><span class="lnr lnr-sync"></span></a></li> -->
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                    </form>
                     </div>
                     @endforeach
                 </div>
-                {{ $product->links() }}
-                    <!-- <div class="shop_toolbar t_bottom">
+                
+                    <div class="shop_toolbar t_bottom">
                         <div class="pagination">
                             <ul>
-                                <li class="current">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li class="next"><a href="#">next</a></li>
-                                <li><a href="#">>></a></li>
+                            {{ $product->links() }}
                             </ul>
                         </div>
-                    </div> -->
+                    </div>
                     <!--shop toolbar end-->
                     <!--shop wrapper end-->
                 </div>

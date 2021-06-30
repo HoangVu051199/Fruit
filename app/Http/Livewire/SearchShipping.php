@@ -20,7 +20,7 @@ class SearchShipping extends Component
             ->orWhere('customer_email', 'LIKE', $searchTerm)
             ->orWhere('customer_phone', 'LIKE', $searchTerm)
             ->orWhere('customer_address', 'LIKE', $searchTerm)
-            ->orderBy('id', 'ASC')->paginate(5);
+            ->orderBy('id', 'ASC')->paginate(15);
 
         return view('livewire.search-shipping',[
             'shipping' => $shipping

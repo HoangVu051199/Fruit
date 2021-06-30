@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="backend/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Select2 -->
     <link href="backend/css/select2.min.css" rel="stylesheet" />
+    
     <!-- Custom Stylesheet -->
     <link href="backend/plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link href="backend/css/style.css" rel="stylesheet">

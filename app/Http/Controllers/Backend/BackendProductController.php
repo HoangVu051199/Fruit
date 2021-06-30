@@ -14,10 +14,7 @@ class BackendProductController extends Controller
 {
     public function index()
     {
-
-        $product = Product::orderBy('id', 'asc')->get();
-
-        return view('backend.product.index', compact('product'));
+        return view('backend.product.index');
     }
 
     public function create()

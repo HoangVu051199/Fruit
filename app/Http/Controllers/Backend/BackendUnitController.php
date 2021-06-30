@@ -9,9 +9,7 @@ class BackendUnitController extends Controller
 {
     public function index()
     {
-        $unit = Unit::orderBy('id', 'asc')->get();
-
-        return view('backend.unit.index', compact('unit'));
+        return view('backend.unit.index');
     }
 
     public function create()

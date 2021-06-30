@@ -6,15 +6,14 @@ use App\Http\Requests\BackendCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use Brian2694\Toastr\Facades\Toastr;
 
 class BackendCategoryController extends Controller
 {
 
     public function index()
     {
-        $category = Category::orderBy('id', 'asc')->get();
-
-        return view('backend.category.index', compact('category'));
+        return view('backend.category.index');
     }
 
     public function create()
@@ -31,12 +30,13 @@ class BackendCategoryController extends Controller
             'status' => $request->status
         ]);
 
-        return redirect()
-            ->route('category.index')
-            ->with('message', 'Thêm thành công');
+        return redirect()->route('category.index')->with('Success', 'Thêm thành công');
+
         }catch(\Exception $exception){
-            return redirect()->back()
-                ->with('error', 'Đã xảy ra lỗi khi lưu dữ liệu');
+
+            Toastr::error('Đã xảy ra lỗi lưu dữ liệu', 'Success');
+
+            return redirect()->back();
         }
         
     }
